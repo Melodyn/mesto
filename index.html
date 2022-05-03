@@ -8,14 +8,100 @@
   <title>Русограм: инстаграм российских мест</title>
 </head>
 <body class="page">
-  <h1>Русограм: инстаграм российских мест</h1>
-  <!-- Использованные изображения
-    https://unsplash.com/photos/xUjHsmUMvLQ
-    https://unsplash.com/photos/IwC5mTFtTZI
-    https://unsplash.com/photos/AZ7ZWnc4Tlo
-    https://unsplash.com/photos/eV5RFZ0SWdY
-    https://unsplash.com/photos/LGxBYvC4Twg
-    https://unsplash.com/photos/7PZOZ8LQGqg
-  -->
+  <header class="header">
+    <a href="/" class="logo"></a>
+  </header>
+  <main class="content">
+    <section class="wtf" aria-label="wtf">
+      <article class="profile" aria-label="О профиле">
+        <img src="./images/avatar.jpg" alt="Лицо у дерева" class="profile__avatar">
+        <div class="profile-title">
+          <p class="profile__title">Российская природа</p>
+          <button class="profile__edit"></button>
+        </div>
+        <p class="profile__subtitle">Берегите природу, мать вашу!</p>
+      </article>
+      <button class="add"></button>
+    </section>
+    <section class="places" aria-label="Места России">
+      <ul class="places-list">
+        <li>
+          <figure class="place">
+            <img src="./images/almaty.jpg" alt="Алматы" class="place__image">
+            <figcaption>
+              <a
+                href="https://unsplash.com/photos/xUjHsmUMvLQ"
+                class="place__link"
+                target="_blank">Алматы</a>
+              <button class="place__like"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="place">
+            <img src="./images/altai.jpg" alt="Алтай" class="place__image">
+            <figcaption>
+              <a
+                href="https://unsplash.com/photos/eV5RFZ0SWdY"
+                class="place__link"
+                target="_blank">Алтай</a>
+              <button class="place__like"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="place">
+            <img src="./images/chelyabynsk.jpg" alt="Челябинск" class="place__image">
+            <figcaption>
+              <a
+                href="https://unsplash.com/photos/7PZOZ8LQGqg"
+                class="place__link"
+                target="_blank">Челябинск</a>
+              <button class="place__like"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="place">
+            <img src="./images/leningrad.jpg" alt="Ленинградская область" class="place__image">
+            <figcaption>
+              <a
+                href="https://unsplash.com/photos/AZ7ZWnc4Tlo"
+                class="place__link"
+                target="_blank">Ленинградская область</a>
+              <button class="place__like"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="place">
+            <img src="./images/murmansk.jpg" alt="Мурманск" class="place__image">
+            <figcaption>
+              <a
+                href="https://unsplash.com/photos/IwC5mTFtTZI"
+                class="place__link"
+                target="_blank">Мурманск</a>
+              <button class="place__like"></button>
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="place">
+            <img src="./images/tobolsk.jpg" alt="Тобольск" class="place__image">
+            <figcaption>
+              <a
+                href="https://unsplash.com/photos/LGxBYvC4Twg"
+                class="place__link"
+                target="_blank">Тобольск</a>
+              <button class="place__like"></button>
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2022 Сергей Мелодин</p>
+  </footer>
 </body>
 </html>
