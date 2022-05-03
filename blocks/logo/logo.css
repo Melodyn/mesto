@@ -1,0 +1,7 @@
+.logo {
+  display: block;
+  min-height: 33px;
+  background-image: url('../../images/logo.svg');
+  background-position: top left;
+  background-repeat: no-repeat;
+}

@@ -1,3 +1,19 @@
-@import url('./vendor/normalize.css');
-@import url('./vendor/inter.css');
-@import url('./blocks/page/page.css');
+@import url('../vendor/normalize.css');
+@import url('../vendor/inter.css');
+
+@import url('../blocks/page/page.css');
+
+@import url('../blocks/header/header.css');
+@import url('../blocks/logo/logo.css');
+
+@import url('../blocks/personal/personal.css');
+
+@import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__edit/profile__edit.css');
+
+@import url('../blocks/places-list/places-list.css');
+@import url('../blocks/place/place.css');
+@import url('../blocks/place/__image/place__image.css');
+
+@import url('../blocks/footer/footer.css');
+@import url('../blocks/footer/__copyright/footer__copyright.css');
