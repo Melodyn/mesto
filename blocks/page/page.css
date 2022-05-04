@@ -8,8 +8,5 @@
   /*background-color: black;*/
   /*color: white;*/
   font-family: Inter, Arial, sans-serif;
-}
-
-.profile__avatar {
-  max-width: 25%;
+  font-size: 0;
 }

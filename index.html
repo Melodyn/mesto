@@ -13,13 +13,10 @@
   </header>
   <main class="content">
     <section class="personal" aria-label="Персональный блок">
+      <img src="./images/avatar.jpg" alt="Лицо у дерева" class="personal__avatar">
       <article class="profile" aria-label="Об авторе">
-        <img src="./images/avatar.jpg" alt="Лицо у дерева" class="profile__avatar">
-        <div class="profile-title">
-          <button class="profile__edit"></button>
-          <p class="profile__title">Российская природа</p>
-          <p class="profile__subtitle">Берегите природу, мать вашу!</p>
-        </div>
+        <p class="profile__title"><button class="profile__edit"></button>Российская природа</p>
+        <p class="profile__subtitle">Берегите природу, мать вашу!</p>
       </article>
       <button class="personal__place-add"></button>
     </section>
@@ -28,7 +25,7 @@
         <li>
           <figure class="place">
             <img src="./images/almaty.jpg" alt="Алматы" class="place__image">
-            <figcaption>
+            <figcaption class="place-info">
               <a
                 href="https://unsplash.com/photos/xUjHsmUMvLQ"
                 class="place__link"
@@ -40,19 +37,19 @@
         <li>
           <figure class="place">
             <img src="./images/altai.jpg" alt="Алтай" class="place__image">
-            <figcaption>
+            <figcaption class="place-info">
               <a
                 href="https://unsplash.com/photos/eV5RFZ0SWdY"
                 class="place__link"
                 target="_blank">Алтай</a>
-              <button class="place__like"></button>
+              <button class="place__like place__like_liked"></button>
             </figcaption>
           </figure>
         </li>
         <li>
           <figure class="place">
             <img src="./images/chelyabynsk.jpg" alt="Челябинск" class="place__image">
-            <figcaption>
+            <figcaption class="place-info">
               <a
                 href="https://unsplash.com/photos/7PZOZ8LQGqg"
                 class="place__link"
@@ -64,7 +61,7 @@
         <li>
           <figure class="place">
             <img src="./images/leningrad.jpg" alt="Ленинградская область" class="place__image">
-            <figcaption>
+            <figcaption class="place-info">
               <a
                 href="https://unsplash.com/photos/AZ7ZWnc4Tlo"
                 class="place__link"
@@ -75,8 +72,11 @@
         </li>
         <li>
           <figure class="place">
-            <img src="./images/murmansk.jpg" alt="Мурманск" class="place__image">
-            <figcaption>
+            <img
+              src="./images/murmansk.jpg"
+              alt="Мурманск"
+              class="place__image place__image_offset_right-bottom">
+            <figcaption class="place-info">
               <a
                 href="https://unsplash.com/photos/IwC5mTFtTZI"
                 class="place__link"
@@ -88,7 +88,7 @@
         <li>
           <figure class="place">
             <img src="./images/tobolsk.jpg" alt="Тобольск" class="place__image">
-            <figcaption>
+            <figcaption class="place-info">
               <a
                 href="https://unsplash.com/photos/LGxBYvC4Twg"
                 class="place__link"

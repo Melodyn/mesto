@@ -1,5 +1,21 @@
 .personal {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  align-items: center;
   padding: 36px 0 0;
+  gap: 30px;
+  grid-template-columns: min-content auto min-content;
+}
+
+@media screen and (max-width: 911px) {
+  .personal {
+    padding: 36px 16px 0;
+    gap: 22px;
+  }
+}
+
+@media screen and (max-width: 611px) {
+  .personal {
+    padding-top: 42px;
+    grid-template-columns: auto;
+  }
 }

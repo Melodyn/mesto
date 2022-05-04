@@ -1,4 +1,6 @@
-.profile {
-  display: flex;
-  flex-direction: row;
+@media screen and (max-width: 611px) {
+  .profile {
+    justify-self: center;
+    text-align: center;
+  }
 }
