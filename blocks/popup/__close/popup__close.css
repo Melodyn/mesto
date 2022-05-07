@@ -27,3 +27,12 @@
     height: 20px;
   }
 }
+
+@media screen and (min-height: 320px) and (max-height: 450px) {
+  .popup__close {
+    top: -36px;
+    right: 16px;
+    width: 20px;
+    height: 20px;
+  }
+}

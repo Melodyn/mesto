@@ -1,5 +1,6 @@
 .header {
   position: relative;
+  padding: 45px 0 41px;
   margin: 0;
 }
 
@@ -11,4 +12,10 @@
   background-color: #545454;
   content: '';
   opacity: .7;
+}
+
+@media screen and (max-width: 911px) {
+  .header {
+    padding: 28px 0 32px;
+  }
 }

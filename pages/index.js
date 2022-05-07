@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const popupEl = document.querySelector('.popup');
-  const buttonEls = document.querySelectorAll('.button[type="button"]');
+  const buttonEls = document.querySelectorAll('.button');
   const getProfileTitleEl = () => document.querySelector('.profile__title-text');
   const getProfileSubtitleEl = () => document.querySelector('.profile__subtitle');
   const formEl = popupEl.querySelector('.popup-form');
@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     formEl.title.value = profileTitleEl.textContent;
     formEl.subtitle.value = profileSubtitleEl.textContent;
     popupEl.classList.add('popup_opened');
+    formEl.title.focus();
   };
 
   const closePopupHandler = () => {
@@ -40,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   buttonEls.forEach((button) => {
-    const { classList } = button;
-    switch (true) {
+    const { classList, type } = button;
+    switch (type !== 'submit') {
       case classList.contains('profile__edit'):
         button.addEventListener('click', profileEditHandler);
         break;
@@ -52,7 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', likeHandler(button));
         break;
       default:
-        button.addEventListener('click', () => alert('Папався! 🦀'));
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('Папався! 🦀');
+        });
         break;
     }
   });
