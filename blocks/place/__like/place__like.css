@@ -4,7 +4,6 @@
   background-image: url('../../../images/buttons/like.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  filter: invert(1);
   transition: .3s;
 }
 

@@ -5,7 +5,6 @@
   background-image: url('../../../images/buttons/edit.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  filter: invert(1);
   float: right;
   transition: .3s;
 }

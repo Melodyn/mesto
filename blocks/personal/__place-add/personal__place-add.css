@@ -4,7 +4,6 @@
   background-image: url('../../../images/buttons/add.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  filter: invert(1);
   justify-self: center;
   transition: .3s;
 }

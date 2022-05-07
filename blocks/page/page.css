@@ -5,6 +5,8 @@
   flex-direction: column;
   padding: 0;
   margin: 0 auto;
+  background-color: black;
+  color: white;
   font-family: Inter, Arial, sans-serif;
   font-size: 0;
 }

@@ -14,7 +14,7 @@
   }
 }
 
-@media screen and (min-height: 320px) and (max-height: 450px) {
+@media screen and (max-height: 450px) {
   .popup-form {
     padding: 16px 24px;
   }
