@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  formEl.title.addEventListener('focus', ({ target }) => target.select());
+  formEl.subtitle.addEventListener('focus', ({ target }) => target.select());
   formEl.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -42,22 +44,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   buttonEls.forEach((button) => {
     const { classList, type } = button;
-    switch (type !== 'submit') {
-      case classList.contains('profile__edit'):
-        button.addEventListener('click', profileEditHandler);
-        break;
-      case classList.contains('popup__close'):
-        button.addEventListener('click', closePopupHandler);
-        break;
-      case classList.contains('place__like'):
-        button.addEventListener('click', likeHandler(button));
-        break;
-      default:
-        button.addEventListener('click', (e) => {
-          e.preventDefault();
-          alert('Папався! 🦀');
-        });
-        break;
+    if (type !== 'submit') {
+      switch (true) {
+        case classList.contains('profile__edit'):
+          button.addEventListener('click', profileEditHandler);
+          break;
+        case classList.contains('popup__close'):
+          button.addEventListener('click', closePopupHandler);
+          break;
+        case classList.contains('place__like'):
+          button.addEventListener('click', likeHandler(button));
+          break;
+        default:
+          button.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Папався! 🦀');
+          });
+          break;
+      }
     }
   });
 });
