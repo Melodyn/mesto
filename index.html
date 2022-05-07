@@ -8,18 +8,52 @@
   <title>Русограм: инстаграм российских мест</title>
 </head>
 <body class="page">
+  <section class="modal modal_hidden" aria-label="Редактировать профиль">
+    <div class="modal__container">
+      <div class="modal__close" tabindex="4"></div>
+      <form action="" name="profile-edit" class="modal-form">
+        <h2 class="modal-form__title">Редактировать профиль</h2>
+        <fieldset class="modal-form__items">
+          <input
+            type="text"
+            id="profile-title"
+            class="modal-form__item"
+            placeholder="Название профиля"
+            tabindex="1"
+            required>
+          <input
+            type="text"
+            id="profile-subtitle"
+            class="modal-form__item"
+            placeholder="Описание профиля"
+            tabindex="2"
+            required>
+        </fieldset>
+        <fieldset class="modal-form__handlers">
+          <input
+            type="submit"
+            class="modal-form__button"
+            tabindex="3"
+            value="Сохранить">
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
   <header class="header">
     <a href="/" class="logo"></a>
   </header>
+
   <main class="content">
     <section class="personal" aria-label="Персональный блок">
       <img src="./images/avatar.jpg" alt="Лицо у дерева" class="personal__avatar">
       <article class="profile" aria-label="Об авторе">
-        <p class="profile__title"><button class="profile__edit"></button>Российская природа</p>
+        <p class="profile__title"><button class="profile__edit"></button>Природа России</p>
         <p class="profile__subtitle">Берегите природу, мать вашу!</p>
       </article>
       <button class="personal__place-add"></button>
     </section>
+
     <section class="places" aria-label="Места России">
       <ul class="places-list">
         <li>
@@ -100,6 +134,7 @@
       </ul>
     </section>
   </main>
+
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Сергей Мелодин</p>
   </footer>

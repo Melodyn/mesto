@@ -1,0 +1,12 @@
+.modal-form__items {
+  width: 100%;
+  padding: 24px 0 0;
+  border: none;
+  margin: 0;
+}
+
+@media screen and (max-width: 611px) {
+  .modal-form__items {
+    padding-top: 45px;
+  }
+}
