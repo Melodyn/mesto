@@ -11,19 +11,21 @@
   <section class="modal modal_hidden" aria-label="Редактировать профиль">
     <div class="modal__container">
       <div class="modal__close" tabindex="4"></div>
-      <form action="" name="profile-edit" class="modal-form">
+      <form action="/" name="profile" class="modal-form">
         <h2 class="modal-form__title">Редактировать профиль</h2>
         <fieldset class="modal-form__items">
           <input
             type="text"
-            id="profile-title"
+            id="title"
+            name="title"
             class="modal-form__item"
             placeholder="Название профиля"
             tabindex="1"
             required>
           <input
             type="text"
-            id="profile-subtitle"
+            id="subtitle"
+            name="subtitle"
             class="modal-form__item"
             placeholder="Описание профиля"
             tabindex="2"
@@ -48,7 +50,7 @@
     <section class="personal" aria-label="Персональный блок">
       <img src="./images/avatar.jpg" alt="Лицо у дерева" class="personal__avatar">
       <article class="profile" aria-label="Об авторе">
-        <p class="profile__title"><button class="profile__edit"></button>Природа России</p>
+        <h2 class="profile__title"><button class="profile__edit"></button>Природа России</h2>
         <p class="profile__subtitle">Берегите природу, мать вашу!</p>
       </article>
       <button class="personal__place-add"></button>
