@@ -1,4 +1,4 @@
-.modal-form {
+.popup-form {
   min-width: 288px;
   max-width: 430px;
   box-sizing: border-box;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 611px) {
-  .modal-form {
+  .popup-form {
     padding: 25px 22px;
   }
 }

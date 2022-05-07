@@ -8,17 +8,17 @@
   <title>Русограм: инстаграм российских мест</title>
 </head>
 <body class="page">
-  <section class="modal modal_hidden" aria-label="Редактировать профиль">
-    <div class="modal__container">
-      <div class="modal__close" tabindex="4"></div>
-      <form action="/" name="profile" class="modal-form">
-        <h2 class="modal-form__title">Редактировать профиль</h2>
-        <fieldset class="modal-form__items">
+  <section class="popup" aria-label="Редактировать профиль">
+    <div class="popup__container">
+      <button type="button" class="button popup__close" tabindex="4"></button>
+      <form action="/" name="profile" class="popup-form">
+        <h2 class="popup-form__title">Редактировать профиль</h2>
+        <fieldset class="popup-form__items">
           <input
             type="text"
             id="title"
             name="title"
-            class="modal-form__item"
+            class="popup-form__item"
             placeholder="Название профиля"
             tabindex="1"
             required>
@@ -26,15 +26,15 @@
             type="text"
             id="subtitle"
             name="subtitle"
-            class="modal-form__item"
+            class="popup-form__item"
             placeholder="Описание профиля"
             tabindex="2"
             required>
         </fieldset>
-        <fieldset class="modal-form__handlers">
+        <fieldset class="popup-form__handlers">
           <input
             type="submit"
-            class="modal-form__button"
+            class="button popup-form__button"
             tabindex="3"
             value="Сохранить">
         </fieldset>
@@ -50,10 +50,13 @@
     <section class="personal" aria-label="Персональный блок">
       <img src="./images/avatar.jpg" alt="Лицо у дерева" class="personal__avatar">
       <article class="profile" aria-label="Об авторе">
-        <h2 class="profile__title"><button class="profile__edit"></button>Природа России</h2>
-        <p class="profile__subtitle">Берегите природу, мать вашу!</p>
+        <h2 class="profile__title">
+          <button type="button" class="button profile__edit"></button>
+          <span class="profile__title-text">Природа России</span>
+        </h2>
+        <p class="profile__subtitle">Берегите природу, мать&nbsp;вашу!</p>
       </article>
-      <button class="personal__place-add"></button>
+      <button type="button" class="button personal__place-add"></button>
     </section>
 
     <section class="places" aria-label="Места России">
@@ -66,7 +69,7 @@
                 href="https://unsplash.com/photos/xUjHsmUMvLQ"
                 class="place__link"
                 target="_blank">Алматы</a>
-              <button class="place__like"></button>
+              <button type="button" class="button place__like"></button>
             </figcaption>
           </figure>
         </li>
@@ -78,7 +81,7 @@
                 href="https://unsplash.com/photos/eV5RFZ0SWdY"
                 class="place__link"
                 target="_blank">Алтай</a>
-              <button class="place__like place__like_liked"></button>
+              <button type="button" class="button place__like place__like_liked"></button>
             </figcaption>
           </figure>
         </li>
@@ -90,7 +93,7 @@
                 href="https://unsplash.com/photos/7PZOZ8LQGqg"
                 class="place__link"
                 target="_blank">Челябинск</a>
-              <button class="place__like"></button>
+              <button type="button" class="button place__like"></button>
             </figcaption>
           </figure>
         </li>
@@ -102,7 +105,7 @@
                 href="https://unsplash.com/photos/AZ7ZWnc4Tlo"
                 class="place__link"
                 target="_blank">Ленинградская область</a>
-              <button class="place__like"></button>
+              <button type="button" class="button place__like"></button>
             </figcaption>
           </figure>
         </li>
@@ -117,7 +120,7 @@
                 href="https://unsplash.com/photos/IwC5mTFtTZI"
                 class="place__link"
                 target="_blank">Мурманск</a>
-              <button class="place__like"></button>
+              <button type="button" class="button place__like"></button>
             </figcaption>
           </figure>
         </li>
@@ -129,7 +132,7 @@
                 href="https://unsplash.com/photos/LGxBYvC4Twg"
                 class="place__link"
                 target="_blank">Тобольск</a>
-              <button class="place__like"></button>
+              <button type="button" class="button place__like"></button>
             </figcaption>
           </figure>
         </li>
@@ -140,5 +143,6 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Сергей Мелодин</p>
   </footer>
+  <script src="pages/index.js"></script>
 </body>
 </html>
