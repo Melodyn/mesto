@@ -3,7 +3,7 @@
   width: 100%;
   box-sizing: border-box;
   align-items: center;
-  padding: 36px 0 0;
+  padding: 39px 0 0;
   column-gap: 18px;
   grid-template-areas:
     'image title    edit     add'

@@ -28,7 +28,7 @@
 @media screen and (max-width: 611px) {
   .personal__place-add {
     width: 100%;
-    margin-top: 36px;
+    margin-top: 32px;
   }
 
   .personal__place-add::before {

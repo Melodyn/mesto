@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 611px) {
   .profile__subtitle {
-    padding-top: 14px;
+    padding-top: 8px;
     padding-left: 0;
     justify-self: center;
   }
