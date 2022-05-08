@@ -1,4 +1,4 @@
-.personal__place-add {
+.profile__place-add {
   position: relative;
   width: 150px;
   height: 50px;
@@ -9,7 +9,7 @@
   transition: .3s;
 }
 
-.personal__place-add::before {
+.profile__place-add::before {
   position: absolute;
   top: calc(50% - (22px / 2));
   left: calc(50% - (22px / 2));
@@ -21,17 +21,17 @@
   content: '';
 }
 
-.personal__place-add:hover {
+.profile__place-add:hover {
   opacity: .6;
 }
 
 @media screen and (max-width: 611px) {
-  .personal__place-add {
+  .profile__place-add {
     width: 100%;
     margin-top: 32px;
   }
 
-  .personal__place-add::before {
+  .profile__place-add::before {
     top: calc(50% - (16px / 2));
     left: calc(50% - (16px / 2));
     width: 16px;

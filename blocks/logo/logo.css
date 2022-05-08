@@ -6,6 +6,7 @@
   background-position: left center;
   background-repeat: no-repeat;
   background-size: auto 33px;
+  transition: .3s;
 }
 
 .logo:hover {
