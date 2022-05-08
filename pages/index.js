@@ -1,13 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const popupEl = document.querySelector('.popup');
   const buttonEls = document.querySelectorAll('.button');
-  const getProfileTitleEl = () => document.querySelector('.profile__title-text');
-  const getProfileSubtitleEl = () => document.querySelector('.profile__subtitle');
+  const profileTitleEl = document.querySelector('.profile__title-text');
+  const profileSubtitleEl = document.querySelector('.profile__subtitle');
   const formEl = popupEl.querySelector('.popup-form');
 
   const profileEditHandler = () => {
-    const profileTitleEl = getProfileTitleEl();
-    const profileSubtitleEl = getProfileSubtitleEl();
     formEl.title.value = profileTitleEl.textContent;
     formEl.subtitle.value = profileSubtitleEl.textContent;
     popupEl.classList.add('popup_opened');
@@ -26,21 +24,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  formEl.title.addEventListener('focus', ({ target }) => target.select());
-  formEl.subtitle.addEventListener('focus', ({ target }) => target.select());
-  formEl.addEventListener('submit', (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const title = formData.get('title');
     const subtitle = formData.get('subtitle');
 
-    const profileTitleEl = getProfileTitleEl();
-    const profileSubtitleEl = getProfileSubtitleEl();
     profileTitleEl.textContent = title;
     profileSubtitleEl.textContent = subtitle;
 
     popupEl.classList.remove('popup_opened');
-  });
+  };
+
+  const focusHandler = ({ target }) => target.select();
+
+  const defaultClickHandler = (e) => {
+    e.preventDefault();
+    alert('Папався! 🦀');
+  };
+
+  formEl.title.addEventListener('focus', focusHandler);
+  formEl.subtitle.addEventListener('focus', focusHandler);
+  formEl.addEventListener('submit', submitHandler);
 
   buttonEls.forEach((button) => {
     const { classList, type } = button;
@@ -56,10 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
           button.addEventListener('click', likeHandler(button));
           break;
         default:
-          button.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Папався! 🦀');
-          });
+          button.addEventListener('click', defaultClickHandler);
           break;
       }
     }

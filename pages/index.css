@@ -18,10 +18,10 @@
 @import url('../blocks/profile/__subtitle/profile__subtitle.css');
 
 @import url('../blocks/places/places.css');
-@import url('../blocks/places-list/places-list.css');
-@import url('../blocks/place-info/place-info.css');
+@import url('../blocks/places/__list/places__list.css');
 
 @import url('../blocks/place/place.css');
+@import url('../blocks/place/__info/place__info.css');
 @import url('../blocks/place/__image/place__image.css');
 @import url('../blocks/place/__image/_offset/place__image_offset_right-bottom.css');
 @import url('../blocks/place/__like/place__like.css');
