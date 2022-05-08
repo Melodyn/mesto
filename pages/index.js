@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = formData.get('title');
     const subtitle = formData.get('subtitle');
 
-    profileTitleEl.textContent = title;
-    profileSubtitleEl.textContent = subtitle;
+    profileTitleEl.textContent = title.trim();
+    profileSubtitleEl.textContent = subtitle.trim();
 
     popupEl.classList.remove('popup_opened');
   };
