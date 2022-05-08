@@ -2,10 +2,10 @@
   position: relative;
   width: 150px;
   height: 50px;
-  background-image: url('../../../images/buttons/add__container.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  justify-self: center;
+  border: 2px solid white;
+  border-radius: 2px;
+  grid-area: add;
+  justify-self: end;
   transition: .3s;
 }
 
@@ -15,7 +15,7 @@
   left: calc(50% - (22px / 2));
   width: 22px;
   height: 22px;
-  background-image: url('../../../images/buttons/add__plus.svg');
+  background-image: url('../../../images/buttons/add.svg');
   background-repeat: no-repeat;
   background-size: cover;
   content: '';
@@ -23,4 +23,18 @@
 
 .personal__place-add:hover {
   opacity: .6;
+}
+
+@media screen and (max-width: 611px) {
+  .personal__place-add {
+    width: 100%;
+    margin-top: 36px;
+  }
+
+  .personal__place-add::before {
+    top: calc(50% - (16px / 2));
+    left: calc(50% - (16px / 2));
+    width: 16px;
+    height: 16px;
+  }
 }

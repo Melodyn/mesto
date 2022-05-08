@@ -1,21 +1,31 @@
 .personal {
   display: grid;
+  width: 100%;
+  box-sizing: border-box;
   align-items: center;
   padding: 36px 0 0;
-  gap: 30px;
-  grid-template-columns: min-content auto min-content;
+  column-gap: 18px;
+  grid-template-areas:
+    'image title    edit     add'
+    'image subtitle subtitle add';
+  grid-template-columns: min-content min-content min-content auto;
 }
 
 @media screen and (max-width: 911px) {
   .personal {
     padding: 36px 16px 0;
-    gap: 22px;
+    column-gap: 10px;
   }
 }
 
 @media screen and (max-width: 611px) {
   .personal {
     padding-top: 42px;
-    grid-template-columns: auto;
+    grid-template-areas:
+      'image    image'
+      'title    edit'
+      'subtitle subtitle'
+      'add      add';
+    grid-template-columns: auto auto;
   }
 }

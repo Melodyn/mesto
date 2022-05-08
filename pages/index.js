@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const popupEl = document.querySelector('.popup');
   const buttonEls = document.querySelectorAll('.button');
-  const profileTitleEl = document.querySelector('.profile__title-text');
+  const profileTitleEl = document.querySelector('.profile__title');
   const profileSubtitleEl = document.querySelector('.profile__subtitle');
   const formEl = popupEl.querySelector('.popup-form');
 
