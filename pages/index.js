@@ -27,32 +27,14 @@ const initCards = [
 
 document.addEventListener('DOMContentLoaded', () => {
   const popupEl = document.querySelector('.popup');
-  const formEl = popupEl.querySelector('.popup-form');
+  const popupContainerEl = popupEl.querySelector('.popup__container');
   const buttonEls = document.querySelectorAll('.button');
   const profileTitleEl = document.querySelector('.profile__title');
   const profileSubtitleEl = document.querySelector('.profile__subtitle');
 
-  const profileEditHandler = () => {
-    formEl.title.value = profileTitleEl.textContent;
-    formEl.subtitle.value = profileSubtitleEl.textContent;
-    popupEl.classList.add('popup_opened');
-    formEl.title.focus();
-  };
-
   const closePopupHandler = () => {
     popupEl.classList.remove('popup_opened');
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const title = formData.get('title');
-    const subtitle = formData.get('subtitle');
-
-    profileTitleEl.textContent = title.trim();
-    profileSubtitleEl.textContent = subtitle.trim();
-
-    popupEl.classList.remove('popup_opened');
+    popupContainerEl.children[1].remove();
   };
 
   const focusHandler = ({ target }) => target.select();
@@ -62,29 +44,35 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('Папався! 🦀');
   };
 
-  formEl.title.addEventListener('focus', focusHandler);
-  formEl.subtitle.addEventListener('focus', focusHandler);
-  formEl.addEventListener('submit', submitHandler);
+  /* edit profile */
+  const editProfileFormEl = document
+    .querySelector('#popup-form-edit-profile')
+    .content
+    .querySelector('.popup-form');
 
-  buttonEls.forEach((button) => {
-    const { classList, type } = button;
-    if (type !== 'submit') {
-      switch (true) {
-        case classList.contains('profile__edit'):
-          button.addEventListener('click', profileEditHandler);
-          break;
-        case classList.contains('popup__close'):
-          button.addEventListener('click', closePopupHandler);
-          break;
-        case classList.contains('place__like'):
-          // button.addEventListener('click', likeHandler(button));
-          break;
-        default:
-          button.addEventListener('click', defaultClickHandler);
-          break;
-      }
-    }
-  });
+  const profileEditHandler = () => {
+    editProfileFormEl.title.value = profileTitleEl.textContent;
+    editProfileFormEl.subtitle.value = profileSubtitleEl.textContent;
+    popupContainerEl.append(editProfileFormEl);
+    popupEl.classList.add('popup_opened');
+    editProfileFormEl.title.focus();
+  };
+
+  const submitProfileHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const title = formData.get('title');
+    const subtitle = formData.get('subtitle');
+
+    profileTitleEl.textContent = title.trim();
+    profileSubtitleEl.textContent = subtitle.trim();
+
+    closePopupHandler();
+  };
+
+  editProfileFormEl.title.addEventListener('focus', focusHandler);
+  editProfileFormEl.subtitle.addEventListener('focus', focusHandler);
+  editProfileFormEl.addEventListener('submit', submitProfileHandler);
 
   /* place */
   const placesListEl = document.querySelector('.places__list');
@@ -134,4 +122,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* run */
   initCards.forEach(addPlace);
+
+  buttonEls.forEach((button) => {
+    const { classList, type } = button;
+    if (type !== 'submit') {
+      switch (true) {
+        case classList.contains('profile__edit'):
+          button.addEventListener('click', profileEditHandler);
+          break;
+        case classList.contains('popup__close'):
+          button.addEventListener('click', closePopupHandler);
+          break;
+        case classList.contains('place__like'):
+          // button.addEventListener('click', likeHandler(button));
+          break;
+        default:
+          button.addEventListener('click', defaultClickHandler);
+          break;
+      }
+    }
+  });
 });
