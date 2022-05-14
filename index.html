@@ -59,81 +59,6 @@
 
     <section class="places" aria-label="Места России">
       <ul class="places__list">
-        <li>
-          <article class="place" aria-label="Алматы">
-            <img src="./images/almaty.jpg" alt="Алматы" class="place__image">
-            <div class="place__info">
-              <a
-                href="https://unsplash.com/photos/xUjHsmUMvLQ"
-                class="place__link"
-                target="_blank">Алматы</a>
-              <button type="button" class="button place__like" aria-label="Оценить"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place" aria-label="Алтай">
-            <img src="./images/altai.jpg" alt="Алтай" class="place__image">
-            <div class="place__info">
-              <a
-                href="https://unsplash.com/photos/eV5RFZ0SWdY"
-                class="place__link"
-                target="_blank">Алтай</a>
-              <button type="button" class="button place__like" aria-label="Оценить"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place" aria-label="Челябинск">
-            <img src="./images/chelyabynsk.jpg" alt="Челябинск" class="place__image">
-            <div class="place__info">
-              <a
-                href="https://unsplash.com/photos/7PZOZ8LQGqg"
-                class="place__link"
-                target="_blank">Челябинск</a>
-              <button type="button" class="button place__like" aria-label="Оценить"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place" aria-label="Ленинградская область">
-            <img src="./images/leningrad.jpg" alt="Ленинградская область" class="place__image">
-            <div class="place__info">
-              <a
-                href="https://unsplash.com/photos/AZ7ZWnc4Tlo"
-                class="place__link"
-                target="_blank">Ленинградская область</a>
-              <button type="button" class="button place__like" aria-label="Оценить"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place" aria-label="Мурманск">
-            <img
-              src="./images/murmansk.jpg"
-              alt="Мурманск"
-              class="place__image place__image_offset_right-bottom">
-            <div class="place__info">
-              <a
-                href="https://unsplash.com/photos/IwC5mTFtTZI"
-                class="place__link"
-                target="_blank">Мурманск</a>
-              <button type="button" class="button place__like" aria-label="Оценить"></button>
-            </div>
-          </article>
-        </li>
-        <li>
-          <article class="place" aria-label="Тобольск">
-            <img src="./images/tobolsk.jpg" alt="Тобольск" class="place__image">
-            <div class="place__info">
-              <a
-                href="https://unsplash.com/photos/LGxBYvC4Twg"
-                class="place__link"
-                target="_blank">Тобольск</a>
-              <button type="button" class="button place__like" aria-label="Оценить"></button>
-            </div>
-          </article>
-        </li>
       </ul>
     </section>
   </main>
@@ -141,6 +66,19 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Сергей Мелодин</p>
   </footer>
+  <template id="place">
+    <article class="place" aria-label="">
+      <img src="" alt="" class="place__image">
+      <div class="place__info">
+        <a
+          href=""
+          class="place__link"
+          target="_blank"></a>
+        <button type="button" class="button place__like" aria-label="Оценить"></button>
+      </div>
+      <button type="button" class="button place__remove" aria-label="Удалить"></button>
+    </article>
+  </template>
   <script src="pages/index.js"></script>
 </body>
 </html>

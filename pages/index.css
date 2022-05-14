@@ -21,6 +21,7 @@
 @import url('../blocks/place/__image/place__image.css');
 @import url('../blocks/place/__image/_offset/place__image_offset_right-bottom.css');
 @import url('../blocks/place/__like/place__like.css');
+@import url('../blocks/place/__remove/place__remove.css');
 @import url('../blocks/place/__like/_liked/place__like_liked.css');
 @import url('../blocks/place/__link/place__link.css');
 
