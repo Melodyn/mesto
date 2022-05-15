@@ -1,36 +1,39 @@
 const initCards = [
   {
-    name: 'Алматы',
-    link: 'images/almaty.jpg',
-  },
-  {
-    name: 'Алтай',
-    link: 'images/altai.jpg',
-  },
-  {
-    name: 'Челябинск',
-    link: 'images/chelyabynsk.jpg',
-  },
-  {
-    name: 'Ленинградская область',
-    link: 'images/leningrad.jpg',
+    name: 'Тобольск',
+    link: 'images/tobolsk.jpg',
   },
   {
     name: 'Мурманск',
     link: 'images/murmansk.jpg',
   },
   {
-    name: 'Тобольск',
-    link: 'images/tobolsk.jpg',
+    name: 'Ленинградская область',
+    link: 'images/leningrad.jpg',
+  },
+  {
+    name: 'Челябинск',
+    link: 'images/chelyabynsk.jpg',
+  },
+  {
+    name: 'Алтай',
+    link: 'images/altai.jpg',
+  },
+  {
+    name: 'Алматы',
+    link: 'images/almaty.jpg',
   },
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
   const popupEl = document.querySelector('.popup');
   const popupContainerEl = popupEl.querySelector('.popup__container');
-  const buttonEls = document.querySelectorAll('.button');
   const profileTitleEl = document.querySelector('.profile__title');
   const profileSubtitleEl = document.querySelector('.profile__subtitle');
+
+  const closePopupButtonEl = document.querySelector('.popup__close');
+  const addPlaceButtonEl = document.querySelector('.profile__place-add');
+  const editProfileButtonEl = document.querySelector('.profile__edit');
 
   const fillPopup = (...elements) => popupContainerEl.append(...elements);
   const openPopup = () => popupEl.classList.add('popup_opened');
@@ -39,43 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentEl = popupEl.querySelector('.popup__content');
     contentEl.remove();
   };
+  closePopupButtonEl.addEventListener('click', closePopup);
 
   const focusHandler = ({ target }) => target.select();
-
-  const defaultClickHandler = (e) => {
-    e.preventDefault();
-    alert('Папався! 🦀');
-  };
-
-  /* edit profile */
-  const editProfileFormEl = document
-    .querySelector('#popup-form-edit-profile')
-    .content
-    .querySelector('.popup-form');
-
-  const profileEditHandler = () => {
-    editProfileFormEl.title.value = profileTitleEl.textContent;
-    editProfileFormEl.subtitle.value = profileSubtitleEl.textContent;
-    fillPopup(editProfileFormEl);
-    openPopup();
-    editProfileFormEl.title.focus();
-  };
-
-  const submitProfileHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const title = formData.get('title');
-    const subtitle = formData.get('subtitle');
-
-    profileTitleEl.textContent = title.trim();
-    profileSubtitleEl.textContent = subtitle.trim();
-
-    closePopup();
-  };
-
-  editProfileFormEl.title.addEventListener('focus', focusHandler);
-  editProfileFormEl.subtitle.addEventListener('focus', focusHandler);
-  editProfileFormEl.addEventListener('submit', submitProfileHandler);
 
   /* place */
   const previewEl = document
@@ -136,28 +105,69 @@ document.addEventListener('DOMContentLoaded', () => {
     const placeEl = placeTemplateEl.cloneNode(true);
     liEl.append(placeEl);
     createPlace(liEl, place);
-    placesListEl.append(liEl);
+    placesListEl.prepend(liEl);
   };
+
+  /* edit profile */
+  const editProfileFormEl = document
+    .querySelector('#popup-form-edit-profile')
+    .content
+    .querySelector('.popup-form');
+
+  const profileEditHandler = () => {
+    editProfileFormEl.title.value = profileTitleEl.textContent;
+    editProfileFormEl.subtitle.value = profileSubtitleEl.textContent;
+    fillPopup(editProfileFormEl);
+    openPopup();
+    editProfileFormEl.title.focus();
+  };
+
+  const submitProfileHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const title = formData.get('title');
+    const subtitle = formData.get('subtitle');
+
+    profileTitleEl.textContent = title.trim();
+    profileSubtitleEl.textContent = subtitle.trim();
+
+    closePopup();
+  };
+
+  editProfileFormEl.title.addEventListener('focus', focusHandler);
+  editProfileFormEl.subtitle.addEventListener('focus', focusHandler);
+  editProfileFormEl.addEventListener('submit', submitProfileHandler);
+  editProfileButtonEl.addEventListener('click', profileEditHandler);
+
+  /* add place */
+  const addPlaceFormEl = document
+    .querySelector('#popup-form-add-place')
+    .content
+    .querySelector('.popup-form');
+
+  const addPlaceHandler = () => {
+    addPlaceFormEl.name.value = '';
+    addPlaceFormEl.link.value = '';
+    fillPopup(addPlaceFormEl);
+    openPopup();
+    addPlaceFormEl.name.focus();
+  };
+
+  const submitPlaceHandler = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const name = formData.get('name').trim();
+    const link = formData.get('link').trim();
+
+    closePopup();
+    addPlace({ name, link });
+  };
+
+  addPlaceFormEl.name.addEventListener('focus', focusHandler);
+  addPlaceFormEl.link.addEventListener('focus', focusHandler);
+  addPlaceFormEl.addEventListener('submit', submitPlaceHandler);
+  addPlaceButtonEl.addEventListener('click', addPlaceHandler);
 
   /* run */
   initCards.forEach(addPlace);
-
-  buttonEls.forEach((button) => {
-    const { classList, type } = button;
-    if (type !== 'submit') {
-      switch (true) {
-        case classList.contains('profile__edit'):
-          button.addEventListener('click', profileEditHandler);
-          break;
-        case classList.contains('popup__close'):
-          button.addEventListener('click', closePopup);
-          break;
-        case classList.contains('place__like'):
-          break;
-        default:
-          button.addEventListener('click', defaultClickHandler);
-          break;
-      }
-    }
-  });
 });

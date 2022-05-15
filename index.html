@@ -84,6 +84,35 @@
     </form>
   </template>
 
+  <template id="popup-form-add-place">
+    <form action="/" name="image" class="popup__content popup-form">
+      <h2 class="popup-form__title">Новое место</h2>
+      <fieldset class="popup-form__items">
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="popup-form__item"
+          placeholder="Название"
+          tabindex="1"
+          required>
+        <input
+          type="url"
+          id="link"
+          name="link"
+          class="popup-form__item"
+          placeholder="Ссылка на картинку"
+          tabindex="2"
+          required>
+      </fieldset>
+      <input
+        type="submit"
+        class="button popup-form__button"
+        tabindex="3"
+        value="Сохранить">
+    </form>
+  </template>
+
   <template id="popup-preview-image">
     <div class="popup__content popup-preview">
       <img src="" alt="" class="popup-preview__image">
