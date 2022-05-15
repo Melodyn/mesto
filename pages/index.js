@@ -125,6 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitProfileHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+
+    editProfileFormEl.title.setAttribute('disabled', 'disabled');
+    editProfileFormEl.subtitle.setAttribute('disabled', 'disabled');
+    editProfileFormEl.submit.setAttribute('disabled', 'disabled');
+
     const title = formData.get('title');
     const subtitle = formData.get('subtitle');
 
@@ -132,6 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
     profileSubtitleEl.textContent = subtitle.trim();
 
     closePopup();
+
+    editProfileFormEl.title.removeAttribute('disabled');
+    editProfileFormEl.subtitle.removeAttribute('disabled');
+    editProfileFormEl.submit.removeAttribute('disabled');
   };
 
   editProfileFormEl.title.addEventListener('focus', focusHandler);
@@ -156,11 +165,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitPlaceHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+
+    addPlaceFormEl.name.setAttribute('disabled', 'disabled');
+    addPlaceFormEl.link.setAttribute('disabled', 'disabled');
+    addPlaceFormEl.submit.setAttribute('disabled', 'disabled');
+
     const name = formData.get('name').trim();
     const link = formData.get('link').trim();
 
     closePopup();
     addPlace({ name, link });
+
+    addPlaceFormEl.name.removeAttribute('disabled');
+    addPlaceFormEl.link.removeAttribute('disabled');
+    addPlaceFormEl.submit.removeAttribute('disabled');
   };
 
   addPlaceFormEl.name.addEventListener('focus', focusHandler);
