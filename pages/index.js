@@ -1,190 +1,143 @@
-const initCards = [
-  {
-    name: 'Тобольск',
-    link: 'images/tobolsk.jpg',
-  },
-  {
-    name: 'Мурманск',
-    link: 'images/murmansk.jpg',
-  },
-  {
-    name: 'Ленинградская область',
-    link: 'images/leningrad.jpg',
-  },
-  {
-    name: 'Челябинск',
-    link: 'images/chelyabynsk.jpg',
-  },
-  {
-    name: 'Алтай',
-    link: 'images/altai.jpg',
-  },
-  {
-    name: 'Алматы',
-    link: 'images/almaty.jpg',
-  },
-];
-
 document.addEventListener('DOMContentLoaded', () => {
-  const popupEl = document.querySelector('.popup');
-  const popupContainerEl = popupEl.querySelector('.popup__container');
-  const profileTitleEl = document.querySelector('.profile__title');
-  const profileSubtitleEl = document.querySelector('.profile__subtitle');
+  const elementProfileTitle = document.querySelector('.profile__title');
+  const elementProfileSubtitle = document.querySelector('.profile__subtitle');
 
-  const closePopupButtonEl = document.querySelector('.popup__close');
-  const addPlaceButtonEl = document.querySelector('.profile__place-add');
-  const editProfileButtonEl = document.querySelector('.profile__edit');
+  const rootPopupAddPlace = document.querySelector('.popup_type_add-place');
+  const rootPopupEditProfile = document.querySelector('.popup_type_edit-profile');
+  const rootPopupPreviewImage = document.querySelector('.popup_type_preview');
 
-  const fillPopup = (...elements) => popupContainerEl.append(...elements);
-  const openPopup = () => popupEl.classList.add('popup_opened');
-  const closePopup = () => {
-    popupEl.classList.remove('popup_opened');
-    const contentEl = popupEl.querySelector('.popup__content');
-    contentEl.remove();
-  };
-  closePopupButtonEl.addEventListener('click', closePopup);
+  const buttonEditProfile = document.querySelector('.profile__edit');
+  const buttonAddPlace = document.querySelector('.profile__place-add');
+
+  const openPopup = (elementRootPopup) => elementRootPopup.classList.add('popup_opened');
+  const closePopup = (elementRootPopup) => elementRootPopup.classList.remove('popup_opened');
+
+  [
+    rootPopupAddPlace,
+    rootPopupEditProfile,
+    rootPopupPreviewImage,
+  ].forEach((popup) => {
+    const buttonClosePopup = popup.querySelector('.popup__close');
+    buttonClosePopup.addEventListener('click', () => closePopup(popup));
+  });
 
   const focusHandler = ({ target }) => target.select();
 
   /* place */
-  const previewEl = document
-    .querySelector('#popup-preview-image')
-    .content
-    .querySelector('.popup-preview');
-  const previewImageEl = previewEl.querySelector('.popup-preview__image');
-  const previewTextEl = previewEl.querySelector('.popup-preview__text');
+  const containerImagePreview = rootPopupPreviewImage.querySelector('.popup-preview');
+  const elementPreviewImage = containerImagePreview.querySelector('.popup-preview__image');
+  const elementPreviewText = containerImagePreview.querySelector('.popup-preview__text');
 
-  const placesListEl = document.querySelector('.places__list');
-  const placeTemplateEl = document
+  const elementPlacesList = document.querySelector('.places__list');
+  const elementPlaceTemplate = document
     .querySelector('#place')
     .content
     .querySelector('.place');
 
-  const likeCard = (likeEl) => () => {
-    if (likeEl.classList.contains('place__like_liked')) {
-      likeEl.classList.remove('place__like_liked');
-    } else {
-      likeEl.classList.add('place__like_liked');
-    }
-  };
-
-  const removeCard = (cardEl) => () => {
-    cardEl.remove();
-  };
-
+  const likeCard = (buttonLike) => () => buttonLike.classList.toggle('place__like_liked');
+  const removeCard = (elementCard) => () => elementCard.remove();
   const previewCard = (place) => () => {
-    previewImageEl.setAttribute('src', place.link);
-    previewImageEl.setAttribute('alt', place.name);
-    previewTextEl.textContent = place.name;
-    fillPopup(previewEl);
-    openPopup();
+    elementPreviewImage.setAttribute('src', place.link);
+    elementPreviewImage.setAttribute('alt', place.name);
+    elementPreviewText.textContent = place.name;
+    openPopup(rootPopupPreviewImage);
   };
 
-  const createPlace = (containerEl, place) => {
-    const placeContainerEl = containerEl.querySelector('.place');
-    const imgEl = placeContainerEl.querySelector('.place__image');
-    const linkEl = placeContainerEl.querySelector('.place__link');
-    const likeEl = placeContainerEl.querySelector('.place__like');
-    const removeEl = placeContainerEl.querySelector('.place__remove');
+  const createPlace = (place) => {
+    const elementListItem = document.createElement('li');
+    const elementContainer = elementPlaceTemplate.cloneNode(true);
+    const elementImg = elementContainer.querySelector('.place__image');
+    const elementLink = elementContainer.querySelector('.place__link');
+    const buttonLike = elementContainer.querySelector('.place__like');
+    const buttonRemove = elementContainer.querySelector('.place__remove');
 
-    placeContainerEl.setAttribute('aria-label', place.name);
+    elementContainer.setAttribute('aria-label', place.name);
+    elementListItem.append(elementContainer);
 
-    imgEl.setAttribute('alt', place.name);
-    imgEl.setAttribute('src', place.link);
+    elementImg.setAttribute('alt', place.name);
+    elementImg.setAttribute('src', place.link);
 
-    linkEl.setAttribute('href', place.link);
-    linkEl.textContent = place.name;
+    elementLink.setAttribute('href', place.link);
+    elementLink.textContent = place.name;
 
-    imgEl.addEventListener('click', previewCard(place));
-    likeEl.addEventListener('click', likeCard(likeEl));
-    removeEl.addEventListener('click', removeCard(containerEl));
+    elementImg.addEventListener('click', previewCard(place));
+    buttonLike.addEventListener('click', likeCard(buttonLike));
+    buttonRemove.addEventListener('click', removeCard(elementListItem));
+
+    return elementListItem;
   };
 
-  const addPlace = (place) => {
-    const liEl = document.createElement('li');
-    const placeEl = placeTemplateEl.cloneNode(true);
-    liEl.append(placeEl);
-    createPlace(liEl, place);
-    placesListEl.prepend(liEl);
-  };
+  const addPlace = (place) => elementPlacesList.prepend(createPlace(place));
 
   /* edit profile */
-  const editProfileFormEl = document
-    .querySelector('#popup-form-edit-profile')
-    .content
-    .querySelector('.popup-form');
+  const formEditProfile = rootPopupEditProfile.querySelector('.popup-form');
 
   const profileEditHandler = () => {
-    editProfileFormEl.title.value = profileTitleEl.textContent;
-    editProfileFormEl.subtitle.value = profileSubtitleEl.textContent;
-    fillPopup(editProfileFormEl);
-    openPopup();
-    editProfileFormEl.title.focus();
+    formEditProfile.title.value = elementProfileTitle.textContent;
+    formEditProfile.subtitle.value = elementProfileSubtitle.textContent;
+    openPopup(rootPopupEditProfile);
+    formEditProfile.title.focus();
   };
 
   const submitProfileHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    editProfileFormEl.title.setAttribute('disabled', 'disabled');
-    editProfileFormEl.subtitle.setAttribute('disabled', 'disabled');
-    editProfileFormEl.submit.setAttribute('disabled', 'disabled');
+    formEditProfile.title.setAttribute('disabled', 'disabled');
+    formEditProfile.subtitle.setAttribute('disabled', 'disabled');
+    formEditProfile.submit.setAttribute('disabled', 'disabled');
 
     const title = formData.get('title');
     const subtitle = formData.get('subtitle');
 
-    profileTitleEl.textContent = title.trim();
-    profileSubtitleEl.textContent = subtitle.trim();
+    elementProfileTitle.textContent = title.trim();
+    elementProfileSubtitle.textContent = subtitle.trim();
 
-    closePopup();
+    closePopup(rootPopupEditProfile);
 
-    editProfileFormEl.title.removeAttribute('disabled');
-    editProfileFormEl.subtitle.removeAttribute('disabled');
-    editProfileFormEl.submit.removeAttribute('disabled');
+    formEditProfile.title.removeAttribute('disabled');
+    formEditProfile.subtitle.removeAttribute('disabled');
+    formEditProfile.submit.removeAttribute('disabled');
   };
 
-  editProfileFormEl.title.addEventListener('focus', focusHandler);
-  editProfileFormEl.subtitle.addEventListener('focus', focusHandler);
-  editProfileFormEl.addEventListener('submit', submitProfileHandler);
-  editProfileButtonEl.addEventListener('click', profileEditHandler);
+  formEditProfile.title.addEventListener('focus', focusHandler);
+  formEditProfile.subtitle.addEventListener('focus', focusHandler);
+  formEditProfile.addEventListener('submit', submitProfileHandler);
+  buttonEditProfile.addEventListener('click', profileEditHandler);
 
   /* add place */
-  const addPlaceFormEl = document
-    .querySelector('#popup-form-add-place')
-    .content
-    .querySelector('.popup-form');
+  const formAddPlace = document.querySelector('.popup-form');
 
   const addPlaceHandler = () => {
-    addPlaceFormEl.name.value = '';
-    addPlaceFormEl.link.value = '';
-    fillPopup(addPlaceFormEl);
-    openPopup();
-    addPlaceFormEl.name.focus();
+    formAddPlace.name.value = '';
+    formAddPlace.link.value = '';
+    openPopup(rootPopupAddPlace);
+    formAddPlace.name.focus();
   };
 
   const submitPlaceHandler = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    addPlaceFormEl.name.setAttribute('disabled', 'disabled');
-    addPlaceFormEl.link.setAttribute('disabled', 'disabled');
-    addPlaceFormEl.submit.setAttribute('disabled', 'disabled');
+    formAddPlace.name.setAttribute('disabled', 'disabled');
+    formAddPlace.link.setAttribute('disabled', 'disabled');
+    formAddPlace.submit.setAttribute('disabled', 'disabled');
 
     const name = formData.get('name').trim();
     const link = formData.get('link').trim();
 
-    closePopup();
+    closePopup(rootPopupAddPlace);
     addPlace({ name, link });
 
-    addPlaceFormEl.name.removeAttribute('disabled');
-    addPlaceFormEl.link.removeAttribute('disabled');
-    addPlaceFormEl.submit.removeAttribute('disabled');
+    formAddPlace.name.removeAttribute('disabled');
+    formAddPlace.link.removeAttribute('disabled');
+    formAddPlace.submit.removeAttribute('disabled');
   };
 
-  addPlaceFormEl.name.addEventListener('focus', focusHandler);
-  addPlaceFormEl.link.addEventListener('focus', focusHandler);
-  addPlaceFormEl.addEventListener('submit', submitPlaceHandler);
-  addPlaceButtonEl.addEventListener('click', addPlaceHandler);
+  formAddPlace.name.addEventListener('focus', focusHandler);
+  formAddPlace.link.addEventListener('focus', focusHandler);
+  formAddPlace.addEventListener('submit', submitPlaceHandler);
+  buttonAddPlace.addEventListener('click', addPlaceHandler);
 
   /* run */
   initCards.forEach(addPlace);
