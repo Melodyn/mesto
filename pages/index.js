@@ -32,9 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const profileTitleEl = document.querySelector('.profile__title');
   const profileSubtitleEl = document.querySelector('.profile__subtitle');
 
-  const closePopupHandler = () => {
+  const fillPopup = (...elements) => popupContainerEl.append(...elements);
+  const openPopup = () => popupEl.classList.add('popup_opened');
+  const closePopup = () => {
     popupEl.classList.remove('popup_opened');
-    popupContainerEl.children[1].remove();
+    const contentEl = popupEl.querySelector('.popup__content');
+    contentEl.remove();
   };
 
   const focusHandler = ({ target }) => target.select();
@@ -53,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const profileEditHandler = () => {
     editProfileFormEl.title.value = profileTitleEl.textContent;
     editProfileFormEl.subtitle.value = profileSubtitleEl.textContent;
-    popupContainerEl.append(editProfileFormEl);
-    popupEl.classList.add('popup_opened');
+    fillPopup(editProfileFormEl);
+    openPopup();
     editProfileFormEl.title.focus();
   };
 
@@ -67,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     profileTitleEl.textContent = title.trim();
     profileSubtitleEl.textContent = subtitle.trim();
 
-    closePopupHandler();
+    closePopup();
   };
 
   editProfileFormEl.title.addEventListener('focus', focusHandler);
@@ -75,13 +78,20 @@ document.addEventListener('DOMContentLoaded', () => {
   editProfileFormEl.addEventListener('submit', submitProfileHandler);
 
   /* place */
+  const previewEl = document
+    .querySelector('#popup-preview-image')
+    .content
+    .querySelector('.popup-preview');
+  const previewImageEl = previewEl.querySelector('.popup-preview__image');
+  const previewTextEl = previewEl.querySelector('.popup-preview__text');
+
   const placesListEl = document.querySelector('.places__list');
   const placeTemplateEl = document
     .querySelector('#place')
     .content
     .querySelector('.place');
 
-  const likeHandler = (likeEl) => () => {
+  const likeCard = (likeEl) => () => {
     if (likeEl.classList.contains('place__like_liked')) {
       likeEl.classList.remove('place__like_liked');
     } else {
@@ -89,8 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const removeHandler = (cardEl) => () => {
+  const removeCard = (cardEl) => () => {
     cardEl.remove();
+  };
+
+  const previewCard = (place) => () => {
+    previewImageEl.setAttribute('src', place.link);
+    previewImageEl.setAttribute('alt', place.name);
+    previewTextEl.textContent = place.name;
+    fillPopup(previewEl);
+    openPopup();
   };
 
   const createPlace = (containerEl, place) => {
@@ -108,8 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
     linkEl.setAttribute('href', place.link);
     linkEl.textContent = place.name;
 
-    likeEl.addEventListener('click', likeHandler(likeEl));
-    removeEl.addEventListener('click', removeHandler(containerEl));
+    imgEl.addEventListener('click', previewCard(place));
+    likeEl.addEventListener('click', likeCard(likeEl));
+    removeEl.addEventListener('click', removeCard(containerEl));
   };
 
   const addPlace = (place) => {
@@ -131,10 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
           button.addEventListener('click', profileEditHandler);
           break;
         case classList.contains('popup__close'):
-          button.addEventListener('click', closePopupHandler);
+          button.addEventListener('click', closePopup);
           break;
         case classList.contains('place__like'):
-          // button.addEventListener('click', likeHandler(button));
           break;
         default:
           button.addEventListener('click', defaultClickHandler);

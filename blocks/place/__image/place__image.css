@@ -6,4 +6,10 @@
   margin: 0;
   cursor: pointer;
   object-fit: cover;
+  opacity: 1;
+  transition: .3s;
+}
+
+.place__image:hover {
+  opacity: .6;
 }
