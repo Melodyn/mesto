@@ -1,13 +1,24 @@
 .profile__edit {
+  position: relative;
   width: 24px;
   height: 24px;
   padding: 10px 0 0;
+  border: 1px solid white;
   margin: 0;
+  grid-area: edit;
+  transition: .3s;
+}
+
+.profile__edit::before {
+  position: absolute;
+  top: calc(50% - (10px / 2));
+  left: calc(50% - (10px / 2));
+  width: 10px;
+  height: 10px;
   background-image: url('../../../images/buttons/edit.svg');
   background-repeat: no-repeat;
   background-size: cover;
-  grid-area: edit;
-  transition: .3s;
+  content: '';
 }
 
 .profile__edit:hover {
@@ -19,6 +30,13 @@
     width: 18px;
     height: 18px;
     padding: 0;
+  }
+
+  .profile__edit::before {
+    top: calc(50% - (8px / 2));
+    left: calc(50% - (8px / 2));
+    width: 8px;
+    height: 8px;
   }
 }
 
