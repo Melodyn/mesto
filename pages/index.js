@@ -9,8 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttonEditProfile = document.querySelector('.profile__edit');
   const buttonAddPlace = document.querySelector('.profile__place-add');
 
-  const openPopup = (elementRootPopup) => elementRootPopup.classList.add('popup_opened');
-  const closePopup = (elementRootPopup) => elementRootPopup.classList.remove('popup_opened');
+  const focusHandler = ({ target }) => target.select();
+
+  let openedPopup = null;
+  const openPopup = (elementRootPopup) => {
+    elementRootPopup.classList.add('popup_opened');
+    openedPopup = elementRootPopup;
+  };
+  const closePopup = (elementRootPopup) => {
+    elementRootPopup.classList.remove('popup_opened');
+    openedPopup = null;
+  };
+  const closePopupByClick = (popup) => (e) => {
+    const targetClassList = e.target.classList;
+    if (targetClassList.contains('popup') || targetClassList.contains('popup__container')) {
+      closePopup(popup);
+    }
+  };
+  const closePopupByKey = (e) => {
+    if (openedPopup && (e.key === 'Escape' || e.key === 'Escape')) {
+      closePopup(openedPopup);
+    }
+  };
 
   [
     rootPopupAddPlace,
@@ -19,9 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
   ].forEach((popup) => {
     const buttonClosePopup = popup.querySelector('.popup__close');
     buttonClosePopup.addEventListener('click', () => closePopup(popup));
+    popup.addEventListener('click', closePopupByClick(popup));
   });
-
-  const focusHandler = ({ target }) => target.select();
+  document.addEventListener('keydown', closePopupByKey);
 
   /* place */
   const containerImagePreview = rootPopupPreviewImage.querySelector('.popup-preview');
