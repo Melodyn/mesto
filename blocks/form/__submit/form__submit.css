@@ -1,4 +1,4 @@
-.popup-form__button {
+.form__submit {
   width: 100%;
   min-height: 50px;
   margin: 48px 0 0;
@@ -11,16 +11,19 @@
   transition: .3s;
 }
 
-.popup-form__button:disabled {
-  opacity: .6;
+.form__submit:disabled {
+  border: 1px solid black;
+  background-color: transparent;
+  color: black;
+  opacity: .2;
 }
 
-.popup-form__button:not(:disabled):hover {
+.form__submit:not(:disabled):hover {
   background-color: rgba(0 0 0 / 80%);
 }
 
 @media screen and (max-width: 611px) {
-  .popup-form__button {
+  .form__submit {
     min-height: 46px;
     margin-top: 45px;
     font-size: 14px;
@@ -28,7 +31,7 @@
 }
 
 @media screen and (max-height: 450px) {
-  .popup-form__button {
+  .form__submit {
     min-height: 46px;
     margin-top: 24px;
     font-size: 14px;

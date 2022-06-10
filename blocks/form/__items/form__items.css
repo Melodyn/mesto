@@ -1,4 +1,4 @@
-.popup-form__items {
+.form__items {
   width: 100%;
   padding: 18px 0 0;
   border: none;
@@ -6,13 +6,13 @@
 }
 
 @media screen and (max-width: 611px) {
-  .popup-form__items {
+  .form__items {
     padding-top: 45px;
   }
 }
 
 @media screen and (max-height: 450px) {
-  .popup-form__items {
+  .form__items {
     padding-top: 0;
   }
 }

@@ -1,0 +1,29 @@
+.form__item {
+  width: 100%;
+  padding: 10px 0;
+  border-top: none;
+  border-right: none;
+  border-bottom: 1px solid rgba(0 0 0 / 20%);
+  border-left: none;
+  margin: 29px 0 0;
+  font-size: 14px;
+  line-height: calc(1 / 14 * 17);
+  outline-offset: 4px;
+  transition: 1s;
+}
+
+.form__item:focus {
+  border-bottom: 1px solid rgba(0 0 0 / 100%);
+}
+
+.form__item_invalid,
+.form__item_invalid:focus {
+  border-bottom: 1px solid rgba(255 0 0 / 100%);
+  outline-color: red;
+}
+
+.form__item-error {
+  color: red;
+  font-size: 12px;
+  line-height: calc(1 / 12 * 15);
+}

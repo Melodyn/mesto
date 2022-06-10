@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const addPlace = (place) => elementPlacesList.prepend(createPlace(place));
 
   /* edit profile */
-  const formEditProfile = rootPopupEditProfile.querySelector('.popup-form');
+  const formEditProfile = rootPopupEditProfile.querySelector('.form');
 
   const profileEditHandler = () => {
     formEditProfile.title.value = elementProfileTitle.textContent;
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buttonEditProfile.addEventListener('click', profileEditHandler);
 
   /* add place */
-  const formAddPlace = document.querySelector('.popup-form');
+  const formAddPlace = document.querySelector('.form');
 
   const addPlaceHandler = () => {
     formAddPlace.name.value = '';
@@ -153,6 +153,28 @@ document.addEventListener('DOMContentLoaded', () => {
     formAddPlace.link.removeAttribute('disabled');
     formAddPlace.submit.removeAttribute('disabled');
   };
+
+  const formValidationState = {
+    name: false,
+    link: false,
+  };
+  formAddPlace.name.addEventListener('input', (e) => {
+    const isValid = e.target.validity.valid;
+    formValidationState[e.target.name] = isValid;
+    if (isValid) {
+      console.log('name', e.target.value, formValidationState);
+    }
+    console.log(formValidationState);
+  });
+  formAddPlace.link.addEventListener('input', (e) => {
+    const isValid = e.target.validity.valid;
+    formValidationState[e.target.name] = isValid;
+    if (isValid) {
+      console.log('link', e.target.value, formValidationState);
+    }
+    console.log(formValidationState);
+    // console.log('link', e.target.validity);
+  });
 
   formAddPlace.name.addEventListener('focus', focusHandler);
   formAddPlace.link.addEventListener('focus', focusHandler);

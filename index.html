@@ -45,39 +45,43 @@
     </div>
   </div>
 
-  <div class="popup popup_type_add-place" aria-label="Всплывающее окно">
+  <div class="popup popup_opened popup_type_add-place" aria-label="Всплывающее окно">
     <div class="popup__container">
       <button
         type="button"
         class="button popup__close"
         tabindex="4"
         aria-label="Закрыть"></button>
-      <form action="/" name="place" class="popup__content popup-form">
-        <h2 class="popup-form__title">Новое место</h2>
-        <fieldset class="popup-form__items">
+      <form action="/" name="place" class="popup__content form" tabindex="0" novalidate>
+        <h2 class="form__title">Новое место</h2>
+        <fieldset class="form__items">
           <input
             type="text"
             id="name"
             name="name"
-            class="popup-form__item"
+            class="form__item form__item_invalid"
             placeholder="Название"
             tabindex="1"
+            minlength="2"
+            maxlength="30"
             required>
+          <span class="form__item-error form__item-error_field_name">Ты чо</span>
           <input
             type="url"
             id="link"
             name="link"
-            class="popup-form__item"
+            class="form__item form__item_invalid"
             placeholder="Ссылка на картинку"
             tabindex="2"
             required>
+          <span class="form__item-error form__item-error_field_link">Пёс</span>
         </fieldset>
-        <input
+        <button
           type="submit"
           name="submit"
-          class="button popup-form__button"
+          class="button form__submit"
           tabindex="3"
-          value="Сохранить">
+          disabled>Сохранить</button>
       </form>
     </div>
   </div>
@@ -89,14 +93,14 @@
         class="button popup__close"
         tabindex="4"
         aria-label="Закрыть"></button>
-      <form action="/" name="profile" class="popup__content popup-form">
-        <h2 class="popup-form__title">Редактировать профиль</h2>
-        <fieldset class="popup-form__items">
+      <form action="/" name="profile" class="popup__content form">
+        <h2 class="form__title">Редактировать профиль</h2>
+        <fieldset class="form__items">
           <input
             type="text"
             id="title"
             name="title"
-            class="popup-form__item"
+            class="form__item"
             placeholder="Название профиля"
             tabindex="1"
             required>
@@ -104,17 +108,17 @@
             type="text"
             id="subtitle"
             name="subtitle"
-            class="popup-form__item"
+            class="form__item"
             placeholder="Описание профиля"
             tabindex="2"
             required>
         </fieldset>
-        <input
+        <button
           type="submit"
           name="submit"
-          class="button popup-form__button"
+          class="button form__submit"
           tabindex="3"
-          value="Сохранить">
+          disabled>Сохранить</button>
       </form>
     </div>
   </div>
@@ -133,6 +137,7 @@
     </article>
   </template>
   <script src="vendor/cards.js"></script>
-  <script src="pages/index.js"></script>
+  <script src="scripts/validate.js"></script>
+  <script src="scripts/index-new.js"></script>
 </body>
 </html>
