@@ -1,3 +1,5 @@
+const focusHandler = ({ target }) => target.select();
+
 const processFieldValidation = (validityState, fieldEl, errorTextEl, invalidFieldClass) => {
   const isValid = validityState.valid;
 
@@ -14,6 +16,7 @@ const processFieldValidation = (validityState, fieldEl, errorTextEl, invalidFiel
 
 const processFormValidation = (fieldEls, submitEl) => {
   const isValid = fieldEls.every(({ validity }) => validity.valid);
+  console.log({ isValid });
   if (isValid) {
     submitEl.removeAttribute('disabled');
   } else {
@@ -45,12 +48,17 @@ const enableValidation = (config) => {
 
         processFormValidation(fieldEls, submitEl);
       });
+
+      fieldEl.addEventListener('focus', focusHandler);
     });
 
     formEl.addEventListener('submit', (e) => {
       e.preventDefault();
       const formIsValid = processFormValidation(fieldEls, submitEl);
-      if (!formIsValid) return;
+      if (!formIsValid) {
+        e.stopImmediatePropagation();
+        return;
+      }
 
       fieldEls.forEach((inputEl) => {
         inputEl.setAttribute('disabled', 'disabled');

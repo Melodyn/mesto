@@ -1,47 +1,68 @@
+/* forms */
+const formsConfig = {
+  formSelector: '.form',
+  fieldSelector: '.form__item',
+  submitSelector: '.form__submit',
+  invalidFieldClass: 'form__item_invalid',
+  errorTextContainerSelector: (fieldName) => `.form__item-error_field_${fieldName}`,
+};
+const resetForm = (form) => {
+  form.reset();
+
+  const formFields = form.querySelectorAll(formsConfig.fieldSelector);
+  formFields.forEach((field) => {
+    const errorTextContainerSelector = formsConfig.errorTextContainerSelector(field.name);
+    const containerErrorText = form.querySelector(errorTextContainerSelector);
+
+    field.removeAttribute('disabled');
+    field.classList.remove(formsConfig.invalidFieldClass);
+    containerErrorText.textContent = '';
+  });
+
+  form.submit.removeAttribute('disabled');
+};
+
+/* popups */
+let openedPopup = null;
+const openPopup = (rootPopup) => {
+  rootPopup.classList.add('popup_opened');
+  openedPopup = rootPopup;
+};
+const closePopup = (rootPopup) => {
+  rootPopup.classList.remove('popup_opened');
+  openedPopup = null;
+};
+const closePopupByClick = (popup) => (e) => {
+  const targetClassList = e.target.classList;
+  if (targetClassList.contains('popup') || targetClassList.contains('popup__container')) {
+    closePopup(popup);
+  }
+};
+const closePopupByKey = (e) => {
+  if (openedPopup && (e.key === 'Escape' || e.key === 'Escape')) {
+    closePopup(openedPopup);
+  }
+};
+const findPopup = (allPopups, className) => allPopups
+  .find(({ classList }) => classList.contains(className));
+
+/* app */
 document.addEventListener('DOMContentLoaded', () => {
-  const elementProfileTitle = document.querySelector('.profile__title');
-  const elementProfileSubtitle = document.querySelector('.profile__subtitle');
+  /* forms */
+  enableValidation(formsConfig);
 
-  const rootPopupAddPlace = document.querySelector('.popup_type_add-place');
-  const rootPopupEditProfile = document.querySelector('.popup_type_edit-profile');
-  const rootPopupPreviewImage = document.querySelector('.popup_type_preview');
-
-  const buttonEditProfile = document.querySelector('.profile__edit');
-  const buttonAddPlace = document.querySelector('.profile__place-add');
-
-  const focusHandler = ({ target }) => target.select();
-
-  let openedPopup = null;
-  const openPopup = (elementRootPopup) => {
-    elementRootPopup.classList.add('popup_opened');
-    openedPopup = elementRootPopup;
-  };
-  const closePopup = (elementRootPopup) => {
-    elementRootPopup.classList.remove('popup_opened');
-    openedPopup = null;
-  };
-  const closePopupByClick = (popup) => (e) => {
-    const targetClassList = e.target.classList;
-    if (targetClassList.contains('popup') || targetClassList.contains('popup__container')) {
-      closePopup(popup);
-    }
-  };
-  const closePopupByKey = (e) => {
-    if (openedPopup && (e.key === 'Escape' || e.key === 'Escape')) {
-      closePopup(openedPopup);
-    }
-  };
-
-  [
-    rootPopupAddPlace,
-    rootPopupEditProfile,
-    rootPopupPreviewImage,
-  ].forEach((popup) => {
+  /* popups */
+  const allPopups = Array.from(document.querySelectorAll('.popup'));
+  allPopups.forEach((popup) => {
     const buttonClosePopup = popup.querySelector('.popup__close');
     buttonClosePopup.addEventListener('click', () => closePopup(popup));
     popup.addEventListener('click', closePopupByClick(popup));
   });
   document.addEventListener('keydown', closePopupByKey);
+
+  const rootPopupAddPlace = findPopup(allPopups, 'popup_type_add-place');
+  const rootPopupEditProfile = findPopup(allPopups, 'popup_type_edit-profile');
+  const rootPopupPreviewImage = findPopup(allPopups, 'popup_type_preview');
 
   /* place */
   const containerImagePreview = rootPopupPreviewImage.querySelector('.popup-preview');
@@ -89,97 +110,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const addPlace = (place) => elementPlacesList.prepend(createPlace(place));
 
+  /* add place */
+  const formAddPlace = document.forms.place;
+  const buttonAddPlace = document.querySelector('.profile__add-place');
+
+  const addPlaceHandler = () => {
+    resetForm(formAddPlace);
+    formAddPlace.submit.setAttribute('disabled', 'disabled');
+    openPopup(rootPopupAddPlace);
+    formAddPlace.name.focus();
+  };
+
+  const submitPlaceHandler = () => {
+    const name = formAddPlace.name.value;
+    const link = formAddPlace.link.value;
+
+    closePopup(rootPopupAddPlace);
+    addPlace({ name, link });
+  };
+
+  formAddPlace.addEventListener('submit', submitPlaceHandler);
+  buttonAddPlace.addEventListener('click', addPlaceHandler);
+
   /* edit profile */
-  const formEditProfile = rootPopupEditProfile.querySelector('.form');
+  const formEditProfile = document.forms.profile;
+  const buttonEditProfile = document.querySelector('.profile__edit');
+  const elementProfileTitle = document.querySelector('.profile__title');
+  const elementProfileSubtitle = document.querySelector('.profile__subtitle');
 
   const profileEditHandler = () => {
+    resetForm(formEditProfile);
     formEditProfile.title.value = elementProfileTitle.textContent;
     formEditProfile.subtitle.value = elementProfileSubtitle.textContent;
     openPopup(rootPopupEditProfile);
     formEditProfile.title.focus();
   };
 
-  const submitProfileHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-
-    formEditProfile.title.setAttribute('disabled', 'disabled');
-    formEditProfile.subtitle.setAttribute('disabled', 'disabled');
-    formEditProfile.submit.setAttribute('disabled', 'disabled');
-
-    const title = formData.get('title');
-    const subtitle = formData.get('subtitle');
+  const submitProfileHandler = () => {
+    const title = formEditProfile.title.value;
+    const subtitle = formEditProfile.subtitle.value;
 
     elementProfileTitle.textContent = title.trim();
     elementProfileSubtitle.textContent = subtitle.trim();
 
     closePopup(rootPopupEditProfile);
-
-    formEditProfile.title.removeAttribute('disabled');
-    formEditProfile.subtitle.removeAttribute('disabled');
-    formEditProfile.submit.removeAttribute('disabled');
   };
 
-  formEditProfile.title.addEventListener('focus', focusHandler);
-  formEditProfile.subtitle.addEventListener('focus', focusHandler);
   formEditProfile.addEventListener('submit', submitProfileHandler);
   buttonEditProfile.addEventListener('click', profileEditHandler);
-
-  /* add place */
-  const formAddPlace = document.querySelector('.form');
-
-  const addPlaceHandler = () => {
-    formAddPlace.name.value = '';
-    formAddPlace.link.value = '';
-    openPopup(rootPopupAddPlace);
-    formAddPlace.name.focus();
-  };
-
-  const submitPlaceHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-
-    formAddPlace.name.setAttribute('disabled', 'disabled');
-    formAddPlace.link.setAttribute('disabled', 'disabled');
-    formAddPlace.submit.setAttribute('disabled', 'disabled');
-
-    const name = formData.get('name').trim();
-    const link = formData.get('link').trim();
-
-    closePopup(rootPopupAddPlace);
-    addPlace({ name, link });
-
-    formAddPlace.name.removeAttribute('disabled');
-    formAddPlace.link.removeAttribute('disabled');
-    formAddPlace.submit.removeAttribute('disabled');
-  };
-
-  const formValidationState = {
-    name: false,
-    link: false,
-  };
-  formAddPlace.name.addEventListener('input', (e) => {
-    const isValid = e.target.validity.valid;
-    formValidationState[e.target.name] = isValid;
-    if (isValid) {
-      console.log('name', e.target.value, formValidationState);
-    }
-    console.log(formValidationState);
-  });
-  formAddPlace.link.addEventListener('input', (e) => {
-    const isValid = e.target.validity.valid;
-    formValidationState[e.target.name] = isValid;
-    if (isValid) {
-      console.log('link', e.target.value, formValidationState);
-    }
-    console.log(formValidationState);
-    // console.log('link', e.target.validity);
-  });
-
-  formAddPlace.name.addEventListener('focus', focusHandler);
-  formAddPlace.link.addEventListener('focus', focusHandler);
-  formAddPlace.addEventListener('submit', submitPlaceHandler);
-  buttonAddPlace.addEventListener('click', addPlaceHandler);
 
   /* run */
   initCards.forEach(addPlace);
