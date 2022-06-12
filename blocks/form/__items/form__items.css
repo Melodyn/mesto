@@ -5,14 +5,8 @@
   margin: 0;
 }
 
-@media screen and (max-width: 611px) {
-  .form__items {
-    padding-top: 45px;
-  }
-}
-
 @media screen and (max-height: 450px) {
   .form__items {
-    padding-top: 0;
+    padding: 8px 0;
   }
 }
