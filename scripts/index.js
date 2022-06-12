@@ -6,45 +6,31 @@ const formsConfig = {
   invalidFieldClass: 'form__item_invalid',
   errorTextContainerSelector: (fieldName) => `.form__item-error_field_${fieldName}`,
 };
-const resetForm = (form) => {
-  form.reset();
-
-  const formFields = form.querySelectorAll(formsConfig.fieldSelector);
-  formFields.forEach((field) => {
-    const errorTextContainerSelector = formsConfig.errorTextContainerSelector(field.name);
-    const containerErrorText = form.querySelector(errorTextContainerSelector);
-
-    field.removeAttribute('disabled');
-    field.classList.remove(formsConfig.invalidFieldClass);
-    containerErrorText.textContent = '';
-  });
-
-  form.submit.removeAttribute('disabled');
-};
 
 /* popups */
-let openedPopup = null;
-const openPopup = (rootPopup) => {
+const openPopup = (rootPopup, keyHandler, clickHandler) => {
+  document.addEventListener('keydown', (e) => {
+    keyHandler(e, rootPopup, keyHandler, clickHandler);
+  });
+  rootPopup.addEventListener('click', clickHandler);
   rootPopup.classList.add('popup_opened');
-  openedPopup = rootPopup;
 };
-const closePopup = (rootPopup) => {
+const closePopup = (rootPopup, keyHandler, clickHandler) => {
+  document.removeEventListener('keydown', keyHandler);
+  rootPopup.removeEventListener('click', clickHandler);
   rootPopup.classList.remove('popup_opened');
-  openedPopup = null;
 };
-const closePopupByClick = (popup) => (e) => {
+const closePopupByClick = (e, popup, ...handlers) => {
   const targetClassList = e.target.classList;
   if (targetClassList.contains('popup') || targetClassList.contains('popup__container')) {
-    closePopup(popup);
+    closePopup(popup, ...handlers);
   }
 };
-const closePopupByKey = (e) => {
-  if (openedPopup && (e.key === 'Escape' || e.key === 'Escape')) {
-    closePopup(openedPopup);
+const closePopupByKey = (e, popup, ...handlers) => {
+  if (e.key === 'Escape' || e.key === 'Escape') {
+    closePopup(popup, ...handlers);
   }
 };
-const findPopup = (allPopups, className) => allPopups
-  .find(({ classList }) => classList.contains(className));
 
 /* app */
 document.addEventListener('DOMContentLoaded', () => {
@@ -55,14 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const allPopups = Array.from(document.querySelectorAll('.popup'));
   allPopups.forEach((popup) => {
     const buttonClosePopup = popup.querySelector('.popup__close');
-    buttonClosePopup.addEventListener('click', () => closePopup(popup));
-    popup.addEventListener('click', closePopupByClick(popup));
+    buttonClosePopup.addEventListener('click', () => {
+      closePopup(popup, closePopupByKey, closePopupByClick);
+    });
+    popup.addEventListener('click', (e) => {
+      closePopupByClick(e, popup, closePopupByKey, closePopupByClick);
+    });
   });
-  document.addEventListener('keydown', closePopupByKey);
 
-  const rootPopupAddPlace = findPopup(allPopups, 'popup_type_add-place');
-  const rootPopupEditProfile = findPopup(allPopups, 'popup_type_edit-profile');
-  const rootPopupPreviewImage = findPopup(allPopups, 'popup_type_preview');
+  const rootPopupAddPlace = document.querySelector('.popup_type_add-place');
+  const rootPopupEditProfile = document.querySelector('.popup_type_edit-profile');
+  const rootPopupPreviewImage = document.querySelector('.popup_type_preview');
 
   /* place */
   const containerImagePreview = rootPopupPreviewImage.querySelector('.popup-preview');
@@ -72,8 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementPlacesList = document.querySelector('.places__list');
   const elementPlaceTemplate = document
     .querySelector('#place')
-    .content
-    .querySelector('.place');
+    .content;
 
   const likeCard = (buttonLike) => () => buttonLike.classList.toggle('place__like_liked');
   const removeCard = (elementCard) => () => elementCard.remove();
@@ -81,19 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
     elementPreviewImage.setAttribute('src', place.link);
     elementPreviewImage.setAttribute('alt', place.name);
     elementPreviewText.textContent = place.name;
-    openPopup(rootPopupPreviewImage);
+    openPopup(rootPopupPreviewImage, closePopupByKey, closePopupByClick);
   };
 
   const createPlace = (place) => {
-    const elementListItem = document.createElement('li');
-    const elementContainer = elementPlaceTemplate.cloneNode(true);
+    const elementListItem = elementPlaceTemplate
+      .cloneNode(true)
+      .querySelector('.place-item');
+    const elementContainer = elementListItem.querySelector('.place');
     const elementImg = elementContainer.querySelector('.place__image');
     const elementLink = elementContainer.querySelector('.place__link');
     const buttonLike = elementContainer.querySelector('.place__like');
     const buttonRemove = elementContainer.querySelector('.place__remove');
 
     elementContainer.setAttribute('aria-label', place.name);
-    elementListItem.append(elementContainer);
 
     elementImg.setAttribute('alt', place.name);
     elementImg.setAttribute('src', place.link);
@@ -115,9 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttonAddPlace = document.querySelector('.profile__add-place');
 
   const addPlaceHandler = () => {
-    resetForm(formAddPlace);
+    resetForm(formsConfig, formAddPlace);
     formAddPlace.submit.setAttribute('disabled', 'disabled');
-    openPopup(rootPopupAddPlace);
+    openPopup(rootPopupAddPlace, closePopupByKey, closePopupByClick);
     formAddPlace.name.focus();
   };
 
@@ -139,10 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementProfileSubtitle = document.querySelector('.profile__subtitle');
 
   const profileEditHandler = () => {
-    resetForm(formEditProfile);
+    resetForm(formsConfig, formEditProfile);
     formEditProfile.title.value = elementProfileTitle.textContent;
     formEditProfile.subtitle.value = elementProfileSubtitle.textContent;
-    openPopup(rootPopupEditProfile);
+    openPopup(rootPopupEditProfile, closePopupByKey, closePopupByClick);
     formEditProfile.title.focus();
   };
 

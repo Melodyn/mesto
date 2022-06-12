@@ -66,3 +66,19 @@ const enableValidation = (config) => {
     });
   });
 };
+
+const resetForm = (config, form) => {
+  form.reset();
+
+  const formFields = form.querySelectorAll(config.fieldSelector);
+  formFields.forEach((field) => {
+    const errorTextContainerSelector = config.errorTextContainerSelector(field.name);
+    const containerErrorText = form.querySelector(errorTextContainerSelector);
+
+    field.removeAttribute('disabled');
+    field.classList.remove(config.invalidFieldClass);
+    containerErrorText.textContent = '';
+  });
+
+  form.submit.removeAttribute('disabled');
+};
