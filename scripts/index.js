@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementPlacesList = document.querySelector('.places__list');
   const elementPlaceTemplate = document
     .querySelector('#place')
-    .content;
+    .content
+    .querySelector('.place-item');
 
   const likeCard = (buttonLike) => () => buttonLike.classList.toggle('place__like_liked');
   const removeCard = (elementCard) => () => elementCard.remove();
@@ -73,9 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const createPlace = (place) => {
-    const elementListItem = elementPlaceTemplate
-      .cloneNode(true)
-      .querySelector('.place-item');
+    const elementListItem = elementPlaceTemplate.cloneNode(true);
     const elementContainer = elementListItem.querySelector('.place');
     const elementImg = elementContainer.querySelector('.place__image');
     const elementLink = elementContainer.querySelector('.place__link');
