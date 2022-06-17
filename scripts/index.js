@@ -1,3 +1,6 @@
+import { initCards } from '../vendor/cards.js';
+import { enableValidation, resetForm } from './validate.js';
+
 /* forms */
 const formsConfig = {
   formSelector: '.form',

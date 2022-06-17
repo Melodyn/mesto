@@ -25,7 +25,7 @@ const processFormValidation = (fieldEls, submitEl) => {
   return isValid;
 };
 
-const enableValidation = (config) => {
+export const enableValidation = (config) => {
   const allFormEls = document.querySelectorAll(config.formSelector);
 
   allFormEls.forEach((formEl) => {
@@ -67,7 +67,7 @@ const enableValidation = (config) => {
   });
 };
 
-const resetForm = (config, form) => {
+export const resetForm = (config, form) => {
   form.reset();
 
   const formFields = form.querySelectorAll(config.fieldSelector);
