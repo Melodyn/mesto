@@ -1,7 +1,8 @@
 export class Place {
-  constructor(placeData, templateSelector) {
+  constructor(placeData, templateSelector, imageClickHandler) {
     this._place = placeData;
     this._templateSelector = templateSelector;
+    this._imageClickHandler = imageClickHandler;
     this._template = this._getTemplate();
     this._element = this._createElement();
     this._setListeners();
@@ -49,6 +50,10 @@ export class Place {
 
     this._element.remove.addEventListener('click', () => {
       this._handlerRemove();
+    });
+
+    this._element.image.addEventListener('click', () => {
+      this._imageClickHandler(this._place);
     });
   }
 
