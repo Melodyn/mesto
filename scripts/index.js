@@ -1,6 +1,6 @@
 import { initPlaces } from '../vendor/places.js';
-import { Place } from './place.js';
-import { enableValidation, resetForm } from './validate.js';
+import { Place } from './Place.js';
+import { FormValidator } from './FormValidator.js';
 
 /* forms */
 const formsConfig = {
@@ -8,7 +8,7 @@ const formsConfig = {
   fieldSelector: '.form__item',
   submitSelector: '.form__submit',
   invalidFieldClass: 'form__item_invalid',
-  errorTextContainerSelector: (fieldName) => `.form__item-error_field_${fieldName}`,
+  getErrorTextContainerSelector: (fieldName) => `.form__item-error_field_${fieldName}`,
 };
 
 /* popups */
@@ -38,9 +38,6 @@ const closePopupByKey = (e, popup, ...handlers) => {
 
 /* app */
 document.addEventListener('DOMContentLoaded', () => {
-  /* forms */
-  enableValidation(formsConfig);
-
   /* popups */
   const allPopups = Array.from(document.querySelectorAll('.popup'));
   allPopups.forEach((popup) => {
@@ -83,44 +80,48 @@ document.addEventListener('DOMContentLoaded', () => {
   const addPlace = (place) => elementPlacesList.prepend(createPlace(place));
 
   /* add place */
-  const formAddPlace = document.forms.place;
   const buttonAddPlace = document.querySelector('.profile__add-place');
+  const formAddPlace = new FormValidator(formsConfig, document.forms.place);
+  const elementFormAddPlace = formAddPlace.toElement();
+  formAddPlace.enableValidation();
 
   const addPlaceHandler = () => {
-    resetForm(formsConfig, formAddPlace);
-    formAddPlace.submit.setAttribute('disabled', 'disabled');
+    formAddPlace.reset();
+    elementFormAddPlace.submit.setAttribute('disabled', 'disabled');
     openPopup(rootPopupAddPlace, closePopupByKey, closePopupByClick);
-    formAddPlace.name.focus();
+    elementFormAddPlace.name.focus();
   };
 
   const submitPlaceHandler = () => {
-    const name = formAddPlace.name.value;
-    const link = formAddPlace.link.value;
+    const name = elementFormAddPlace.name.value;
+    const link = elementFormAddPlace.link.value;
 
     closePopup(rootPopupAddPlace);
     addPlace({ name, link });
   };
 
-  formAddPlace.addEventListener('submit', submitPlaceHandler);
+  elementFormAddPlace.addEventListener('submit', submitPlaceHandler);
   buttonAddPlace.addEventListener('click', addPlaceHandler);
 
   /* edit profile */
-  const formEditProfile = document.forms.profile;
   const buttonEditProfile = document.querySelector('.profile__edit');
   const elementProfileTitle = document.querySelector('.profile__title');
   const elementProfileSubtitle = document.querySelector('.profile__subtitle');
+  const formEditProfile = new FormValidator(formsConfig, document.forms.profile);
+  const elementFormEditProfile = formEditProfile.toElement();
+  formEditProfile.enableValidation();
 
   const profileEditHandler = () => {
-    resetForm(formsConfig, formEditProfile);
-    formEditProfile.title.value = elementProfileTitle.textContent;
-    formEditProfile.subtitle.value = elementProfileSubtitle.textContent;
+    formEditProfile.reset();
+    elementFormEditProfile.title.value = elementProfileTitle.textContent;
+    elementFormEditProfile.subtitle.value = elementProfileSubtitle.textContent;
     openPopup(rootPopupEditProfile, closePopupByKey, closePopupByClick);
-    formEditProfile.title.focus();
+    elementFormEditProfile.title.focus();
   };
 
   const submitProfileHandler = () => {
-    const title = formEditProfile.title.value;
-    const subtitle = formEditProfile.subtitle.value;
+    const title = elementFormEditProfile.title.value;
+    const subtitle = elementFormEditProfile.subtitle.value;
 
     elementProfileTitle.textContent = title.trim();
     elementProfileSubtitle.textContent = subtitle.trim();
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closePopup(rootPopupEditProfile);
   };
 
-  formEditProfile.addEventListener('submit', submitProfileHandler);
+  elementFormEditProfile.addEventListener('submit', submitProfileHandler);
   buttonEditProfile.addEventListener('click', profileEditHandler);
 
   /* run */

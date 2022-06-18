@@ -54,7 +54,7 @@ export class Place {
 
   _handlerLike() {
     const selector = this._templateSelector.slice(1);
-    this._element.like.classList.toggle(`.${selector}__like_liked`);
+    this._element.like.classList.toggle(`${selector}__like_liked`);
   }
 
   _handlerRemove() {
