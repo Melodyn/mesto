@@ -1,4 +1,5 @@
-import { initCards } from '../vendor/cards.js';
+import { initPlaces } from '../vendor/places.js';
+import { Place } from './place.js';
 import { enableValidation, resetForm } from './validate.js';
 
 /* forms */
@@ -62,41 +63,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementPreviewText = containerImagePreview.querySelector('.popup-preview__text');
 
   const elementPlacesList = document.querySelector('.places__list');
-  const elementPlaceTemplate = document
-    .querySelector('#place')
-    .content
-    .querySelector('.place-item');
-
-  const likeCard = (buttonLike) => () => buttonLike.classList.toggle('place__like_liked');
-  const removeCard = (elementCard) => () => elementCard.remove();
-  const previewCard = (place) => () => {
+  const previewPlace = (place) => () => {
     elementPreviewImage.setAttribute('src', place.link);
     elementPreviewImage.setAttribute('alt', place.name);
     elementPreviewText.textContent = place.name;
     openPopup(rootPopupPreviewImage, closePopupByKey, closePopupByClick);
   };
 
-  const createPlace = (place) => {
-    const elementListItem = elementPlaceTemplate.cloneNode(true);
-    const elementContainer = elementListItem.querySelector('.place');
-    const elementImg = elementContainer.querySelector('.place__image');
-    const elementLink = elementContainer.querySelector('.place__link');
-    const buttonLike = elementContainer.querySelector('.place__like');
-    const buttonRemove = elementContainer.querySelector('.place__remove');
+  const createPlace = (placeData) => {
+    const place = new Place(placeData, '#place');
+    const elementPlace = place.toElement();
 
-    elementContainer.setAttribute('aria-label', place.name);
+    const elementPlaceImage = elementPlace.querySelector('.place__image');
+    elementPlaceImage.addEventListener('click', previewPlace(placeData));
 
-    elementImg.setAttribute('alt', place.name);
-    elementImg.setAttribute('src', place.link);
-
-    elementLink.setAttribute('href', place.link);
-    elementLink.textContent = place.name;
-
-    elementImg.addEventListener('click', previewCard(place));
-    buttonLike.addEventListener('click', likeCard(buttonLike));
-    buttonRemove.addEventListener('click', removeCard(elementListItem));
-
-    return elementListItem;
+    return elementPlace;
   };
 
   const addPlace = (place) => elementPlacesList.prepend(createPlace(place));
@@ -151,5 +132,5 @@ document.addEventListener('DOMContentLoaded', () => {
   buttonEditProfile.addEventListener('click', profileEditHandler);
 
   /* run */
-  initCards.forEach(addPlace);
+  initPlaces.forEach(addPlace);
 });

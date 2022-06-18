@@ -1,4 +1,4 @@
-export const initCards = [
+export const initPlaces = [
   {
     name: 'Тобольск',
     link: 'images/tobolsk.jpg',
