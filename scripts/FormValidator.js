@@ -39,25 +39,22 @@ export class FormValidator {
   _checkFormState() {
     const isValid = this._element.fields.every(({ elementField: { validity } }) => validity.valid);
     if (isValid) {
-      this._element.submit.removeAttribute('disabled');
+      this._enableSubmitButton();
     } else {
-      this._element.submit.setAttribute('disabled', 'disabled');
+      this._disableSubmitButton();
     }
 
     this._validityState.formIsValid = isValid;
   }
 
   _checkFieldState(elementField, elementError) {
-    const { invalidFieldClass } = this._config;
     const validityState = this._validityState.validity;
     const isValid = validityState.valid;
 
-    elementError.textContent = elementField.validationMessage;
-
     if (isValid) {
-      elementField.classList.remove(invalidFieldClass);
+      this._hideFieldError(elementField, elementError);
     } else {
-      elementField.classList.add(invalidFieldClass);
+      this._showFieldError(elementField, elementError);
     }
   }
 
@@ -79,11 +76,31 @@ export class FormValidator {
         return;
       }
 
-      this._element.submit.setAttribute('disabled', 'disabled');
+      this._disableSubmitButton();
       this._element.fields.forEach(({ elementField }) => {
         elementField.setAttribute('disabled', 'disabled');
       });
     });
+  }
+
+  _disableSubmitButton() {
+    this._element.submit.setAttribute('disabled', 'disabled');
+  }
+
+  _enableSubmitButton() {
+    this._element.submit.removeAttribute('disabled');
+  }
+
+  _showFieldError(elementField, elementError) {
+    const { invalidFieldClass } = this._config;
+    elementField.classList.remove(invalidFieldClass);
+    elementError.textContent = elementField.validationMessage;
+  }
+
+  _hideFieldError(elementField, elementError) {
+    const { invalidFieldClass } = this._config;
+    elementField.classList.remove(invalidFieldClass);
+    elementError.textContent = '';
   }
 
   enableValidation() {
@@ -104,7 +121,7 @@ export class FormValidator {
       elementField.classList.remove(invalidFieldClass);
       elementError.textContent = '';
     });
-    this._element.submit.removeAttribute('disabled');
+    this._enableSubmitButton();
   }
 
   toElement() {
