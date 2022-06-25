@@ -1,3 +1,4 @@
+import './pages/index.css';
 import { initPlaces } from './vendor/places.js';
 import { FormValidator } from './components/FormValidator.js';
 import { Place } from './components/Place.js';

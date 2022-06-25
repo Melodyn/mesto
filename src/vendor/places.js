@@ -1,26 +1,33 @@
+import tobolskImage from '../images/tobolsk.jpg';
+import murmanskImage from '../images/murmansk.jpg';
+import leningradImage from '../images/leningrad.jpg';
+import chelyabynskImage from '../images/chelyabynsk.jpg';
+import altaiImage from '../images/altai.jpg';
+import almatyImage from '../images/almaty.jpg';
+
 export const initPlaces = [
   {
     name: 'Тобольск',
-    link: 'images/tobolsk.jpg',
+    link: tobolskImage,
   },
   {
     name: 'Мурманск',
-    link: 'images/murmansk.jpg',
+    link: murmanskImage,
   },
   {
     name: 'Ленинградская область',
-    link: 'images/leningrad.jpg',
+    link: leningradImage,
   },
   {
     name: 'Челябинск',
-    link: 'images/chelyabynsk.jpg',
+    link: chelyabynskImage,
   },
   {
     name: 'Алтай',
-    link: 'images/altai.jpg',
+    link: altaiImage,
   },
   {
     name: 'Алматы',
-    link: 'images/almaty.jpg',
+    link: almatyImage,
   },
 ];
