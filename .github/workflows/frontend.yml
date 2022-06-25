@@ -30,7 +30,7 @@ jobs:
       - run: |
           git config --global user.name 'Sergei Melodyn'
           git config --global user.email 'samelodyn@gmail.com'
-          git remote add gh-token "https://${{secrets.GH_TOKEN}}@github.com/:user/:repo.git"
+          git remote add gh-token "https://${{secrets.GH_TOKEN}}@github.com/melodyn/mesto.git"
           git checkout --orphan gh-pages
           git merge main
       - run: |
