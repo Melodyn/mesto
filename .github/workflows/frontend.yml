@@ -34,7 +34,7 @@ jobs:
           git merge main
       - run: |
           make ci-build
-          cp -r ./dist/* ../
+          cp -r ./dist/* ./
           rm -rf ./dist
           git add .
           git commit -am "Release"
