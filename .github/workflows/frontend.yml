@@ -35,7 +35,7 @@ jobs:
       - run: |
           make ci-build
           cp -r ./dist/* ./
-          rm -rf ./dist
+          rm -rf ./dist ./src
           git add .
           git commit -am "Release"
           git push --force --set-upstream origin gh-pages
