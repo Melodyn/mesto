@@ -22,7 +22,6 @@ const commonPopupConfig = {
 /* app */
 document.addEventListener('DOMContentLoaded', () => {
   /* popups */
-
   const elementPopupAddPlace = document.querySelector('.popup_type_add-place');
   const elementPopupEditProfile = document.querySelector('.popup_type_edit-profile');
   const elementPopupPreviewImage = document.querySelector('.popup_type_preview');
