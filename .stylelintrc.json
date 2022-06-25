@@ -3,7 +3,7 @@
   "plugins": [
     "stylelint-order"
   ],
-  "ignoreFiles": ["vendor/*.css"],
+  "ignoreFiles": ["src/vendor/*.css"],
   "rules": {
     "selector-class-pattern": null,
     "property-no-vendor-prefix": null,

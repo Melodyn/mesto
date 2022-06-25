@@ -1,9 +1,9 @@
-import { initPlaces } from '../vendor/places.js';
-import { FormValidator } from '../components/FormValidator.js';
-import { Place } from '../components/Place.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { PlaceInfo } from '../components/PlaceInfo.js';
+import { initPlaces } from './vendor/places.js';
+import { FormValidator } from './components/FormValidator.js';
+import { Place } from './components/Place.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
+import { PopupWithForm } from './components/PopupWithForm.js';
+import { PlaceInfo } from './components/PlaceInfo.js';
 
 /* configs */
 const commonFormConfig = {
