@@ -1,128 +1,94 @@
 import { initPlaces } from '../vendor/places.js';
-import { Place } from './Place.js';
-import { FormValidator } from './FormValidator.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Place } from '../components/Place.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PlaceInfo } from '../components/PlaceInfo.js';
 
-/* forms */
-const formsConfig = {
-  formSelector: '.form',
-  fieldSelector: '.form__item',
-  submitSelector: '.form__submit',
-  invalidFieldClass: 'form__item_invalid',
-  getErrorTextContainerSelector: (fieldName) => `.form__item-error_field_${fieldName}`,
+/* configs */
+const commonFormConfig = {
+  selectorField: '.form__item',
+  selectorSubmit: '.form__submit',
+  classNameFieldInvalid: 'form__item_invalid',
+  getSelectorErrorTextContainer: (fieldName) => `.form__item-error_field_${fieldName}`,
 };
 
-/* popups */
-const closePopupByKey = (e) => {
-  if (e.key === 'Escape' || e.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
-const closePopupByOverlay = (e) => {
-  const targetClassList = e.target.classList;
-  if (targetClassList.contains('popup') || targetClassList.contains('popup__container')) {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-};
-const openPopup = (rootPopup) => {
-  document.addEventListener('keydown', closePopupByKey);
-  rootPopup.addEventListener('click', closePopupByOverlay);
-  rootPopup.classList.add('popup_opened');
-};
-const closePopup = (rootPopup) => {
-  document.removeEventListener('keydown', closePopupByKey);
-  rootPopup.removeEventListener('click', closePopupByOverlay);
-  rootPopup.classList.remove('popup_opened');
+const commonPopupConfig = {
+  selectorCloseButton: '.popup__close',
+  classNamePopupOpened: 'popup_opened',
 };
 
 /* app */
 document.addEventListener('DOMContentLoaded', () => {
   /* popups */
-  const allPopups = Array.from(document.querySelectorAll('.popup'));
-  allPopups.forEach((popup) => {
-    const buttonClosePopup = popup.querySelector('.popup__close');
-    buttonClosePopup.addEventListener('click', () => {
-      closePopup(popup);
-    });
-  });
 
-  const rootPopupAddPlace = document.querySelector('.popup_type_add-place');
-  const rootPopupEditProfile = document.querySelector('.popup_type_edit-profile');
-  const rootPopupPreviewImage = document.querySelector('.popup_type_preview');
+  const elementPopupAddPlace = document.querySelector('.popup_type_add-place');
+  const elementPopupEditProfile = document.querySelector('.popup_type_edit-profile');
+  const elementPopupPreviewImage = document.querySelector('.popup_type_preview');
 
   /* place */
-  const containerImagePreview = rootPopupPreviewImage.querySelector('.popup-preview');
-  const elementPreviewImage = containerImagePreview.querySelector('.popup-preview__image');
-  const elementPreviewText = containerImagePreview.querySelector('.popup-preview__text');
-
   const elementPlacesList = document.querySelector('.places__list');
-  const previewPlace = ({ name, link }) => {
-    elementPreviewImage.setAttribute('src', link);
-    elementPreviewImage.setAttribute('alt', name);
-    elementPreviewText.textContent = name;
-    openPopup(rootPopupPreviewImage);
-  };
+  const popupPreviewImage = new PopupWithImage(
+    commonPopupConfig,
+    elementPopupPreviewImage,
+    {
+      selectorImageContainer: '.popup-preview__image',
+      selectorTextContainer: '.popup-preview__text',
+    },
+  );
+  const previewPlace = popupPreviewImage.open.bind(popupPreviewImage);
 
   const createPlace = (placeData) => {
     const place = new Place(placeData, '#place', previewPlace);
     return place.toElement();
   };
-
-  const addPlace = (place) => elementPlacesList.prepend(createPlace(place));
+  const renderPlace = (place) => elementPlacesList.prepend(place);
+  const addPlace = (placeData) => renderPlace(createPlace(placeData));
 
   /* add place */
   const buttonAddPlace = document.querySelector('.profile__add-place');
-  const formAddPlace = new FormValidator(formsConfig, document.forms.place);
-  const elementFormAddPlace = formAddPlace.toElement();
+  const formAddPlace = new FormValidator(commonFormConfig, document.forms.place);
   formAddPlace.enableValidation();
 
-  const addPlaceHandler = () => {
-    formAddPlace.reset();
-    elementFormAddPlace.submit.setAttribute('disabled', 'disabled');
-    openPopup(rootPopupAddPlace);
-    elementFormAddPlace.name.focus();
-  };
+  const popupAddPlace = new PopupWithForm(
+    commonPopupConfig,
+    elementPopupAddPlace,
+    commonFormConfig,
+    formAddPlace,
+    {
+      onSubmit: addPlace,
+      onClose: () => formAddPlace.toElement().submit.setAttribute('disabled', 'disabled'),
+    },
+  );
 
-  const submitPlaceHandler = () => {
-    const name = elementFormAddPlace.name.value;
-    const link = elementFormAddPlace.link.value;
-
-    closePopup(rootPopupAddPlace);
-    addPlace({ name, link });
-  };
-
-  elementFormAddPlace.addEventListener('submit', submitPlaceHandler);
-  buttonAddPlace.addEventListener('click', addPlaceHandler);
+  buttonAddPlace.addEventListener('click', popupAddPlace.open.bind(popupAddPlace));
 
   /* edit profile */
   const buttonEditProfile = document.querySelector('.profile__edit');
   const elementProfileTitle = document.querySelector('.profile__title');
   const elementProfileSubtitle = document.querySelector('.profile__subtitle');
-  const formEditProfile = new FormValidator(formsConfig, document.forms.profile);
-  const elementFormEditProfile = formEditProfile.toElement();
+  const placeInfo = new PlaceInfo(elementProfileTitle, elementProfileSubtitle);
+
+  const formEditProfile = new FormValidator(commonFormConfig, document.forms.profile);
   formEditProfile.enableValidation();
 
-  const profileEditHandler = () => {
-    formEditProfile.reset();
-    elementFormEditProfile.title.value = elementProfileTitle.textContent;
-    elementFormEditProfile.subtitle.value = elementProfileSubtitle.textContent;
-    openPopup(rootPopupEditProfile);
-    elementFormEditProfile.title.focus();
-  };
+  const elementFormEditProfile = formEditProfile.toElement();
+  const popupEditProfile = new PopupWithForm(
+    commonPopupConfig,
+    elementPopupEditProfile,
+    commonFormConfig,
+    formEditProfile,
+    {
+      onSubmit: placeInfo.setUserInfo.bind(placeInfo),
+      onOpen: () => {
+        const { title, subtitle } = placeInfo.getUserInfo();
+        elementFormEditProfile.title.value = title;
+        elementFormEditProfile.subtitle.value = subtitle;
+      },
+    },
+  );
 
-  const submitProfileHandler = () => {
-    const title = elementFormEditProfile.title.value;
-    const subtitle = elementFormEditProfile.subtitle.value;
-
-    elementProfileTitle.textContent = title.trim();
-    elementProfileSubtitle.textContent = subtitle.trim();
-
-    closePopup(rootPopupEditProfile);
-  };
-
-  elementFormEditProfile.addEventListener('submit', submitProfileHandler);
-  buttonEditProfile.addEventListener('click', profileEditHandler);
+  buttonEditProfile.addEventListener('click', popupEditProfile.open.bind(popupEditProfile));
 
   /* run */
   initPlaces.forEach(addPlace);

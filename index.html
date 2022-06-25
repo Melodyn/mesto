@@ -31,7 +31,7 @@
     <p class="footer__copyright">&copy; 2022 Сергей Мелодин</p>
   </footer>
 
-  <div class="popup popup_type_preview" aria-label="Всплывающее окно">
+  <div class="popup popup_type_preview" style="display: none" aria-label="Всплывающее окно">
     <div class="popup__container">
       <button
         type="button"
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="popup popup_type_add-place" aria-label="Всплывающее окно">
+  <div class="popup popup_type_add-place" style="display: none" aria-label="Всплывающее окно">
     <div class="popup__container">
       <button
         type="button"
@@ -87,14 +87,14 @@
     </div>
   </div>
 
-  <div class="popup popup_type_edit-profile" tabindex="0" aria-label="Всплывающее окно">
+  <div class="popup popup_type_edit-profile" style="display: none" tabindex="0" aria-label="Всплывающее окно">
     <div class="popup__container">
       <button
         type="button"
         class="button popup__close"
         tabindex="4"
         aria-label="Закрыть"></button>
-      <form action="/" name="profile" class="popup__content form" novalidate>
+      <form action="/" name="profile" class="popup__content form" tabindex="0" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__items">
           <input
@@ -147,8 +147,8 @@
   </template>
 
   <script type="module" src="vendor/places.js"></script>
-  <script type="module" src="scripts/Place.js"></script>
-  <script type="module" src="scripts/FormValidator.js"></script>
+  <script type="module" src="components/Place.js"></script>
+  <script type="module" src="components/FormValidator.js"></script>
   <script type="module" src="scripts/index.js"></script>
 </body>
 </html>

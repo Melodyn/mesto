@@ -16,16 +16,16 @@ export class FormValidator {
 
   _prepareElements() {
     const {
-      fieldSelector,
-      submitSelector,
-      getErrorTextContainerSelector,
+      selectorField,
+      selectorSubmit,
+      getSelectorErrorTextContainer,
     } = this._config;
 
     const elementForm = this._element.form;
-    this._element.submit = elementForm.querySelector(submitSelector);
-    const fields = Array.from(elementForm.querySelectorAll(fieldSelector));
+    this._element.submit = elementForm.querySelector(selectorSubmit);
+    const fields = Array.from(elementForm.querySelectorAll(selectorField));
     this._element.fields = fields.map((elementField) => {
-      const errorTextContainerSelector = getErrorTextContainerSelector(elementField.name);
+      const errorTextContainerSelector = getSelectorErrorTextContainer(elementField.name);
       const elementError = elementForm.querySelector(errorTextContainerSelector);
       elementField.addEventListener('focus', ({ target }) => target.select());
 
@@ -92,14 +92,14 @@ export class FormValidator {
   }
 
   _showFieldError(elementField, elementError) {
-    const { invalidFieldClass } = this._config;
-    elementField.classList.remove(invalidFieldClass);
+    const { classNameFieldInvalid } = this._config;
+    elementField.classList.remove(classNameFieldInvalid);
     elementError.textContent = elementField.validationMessage;
   }
 
   _hideFieldError(elementField, elementError) {
-    const { invalidFieldClass } = this._config;
-    elementField.classList.remove(invalidFieldClass);
+    const { classNameFieldInvalid } = this._config;
+    elementField.classList.remove(classNameFieldInvalid);
     elementError.textContent = '';
   }
 
@@ -113,12 +113,12 @@ export class FormValidator {
   }
 
   reset() {
-    const { invalidFieldClass } = this._config;
+    const { classNameFieldInvalid } = this._config;
 
     this._element.form.reset();
     this._element.fields.forEach(({ elementField, elementError }) => {
       elementField.removeAttribute('disabled');
-      elementField.classList.remove(invalidFieldClass);
+      elementField.classList.remove(classNameFieldInvalid);
       elementError.textContent = '';
     });
     this._enableSubmitButton();
