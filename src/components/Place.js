@@ -64,6 +64,7 @@ export class Place {
 
   _handlerRemove() {
     this._element.container.remove();
+    this._element = {};
   }
 
   toElement() {

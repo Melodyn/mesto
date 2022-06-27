@@ -1,23 +1,12 @@
 import './pages/index.css';
 import { initPlaces } from './vendor/places.js';
+import { commonFormConfig, commonPopupConfig } from './utils.js';
 import { FormValidator } from './components/FormValidator.js';
 import { Place } from './components/Place.js';
 import { PopupWithImage } from './components/PopupWithImage.js';
 import { PopupWithForm } from './components/PopupWithForm.js';
 import { PlaceInfo } from './components/PlaceInfo.js';
-
-/* configs */
-const commonFormConfig = {
-  selectorField: '.form__item',
-  selectorSubmit: '.form__submit',
-  classNameFieldInvalid: 'form__item_invalid',
-  getSelectorErrorTextContainer: (fieldName) => `.form__item-error_field_${fieldName}`,
-};
-
-const commonPopupConfig = {
-  selectorCloseButton: '.popup__close',
-  classNamePopupOpened: 'popup_opened',
-};
+import { Section } from './components/Section.js';
 
 /* app */
 document.addEventListener('DOMContentLoaded', () => {
@@ -42,8 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const place = new Place(placeData, '#place', previewPlace);
     return place.toElement();
   };
-  const renderPlace = (place) => elementPlacesList.prepend(place);
-  const addPlace = (placeData) => renderPlace(createPlace(placeData));
+  const placesList = new Section({
+    items: initPlaces,
+    renderer: (placeData) => placesList.addItem(createPlace(placeData)),
+  }, elementPlacesList);
 
   /* add place */
   const buttonAddPlace = document.querySelector('.profile__add-place');
@@ -56,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     commonFormConfig,
     formAddPlace,
     {
-      onSubmit: addPlace,
-      onClose: () => formAddPlace.toElement().submit.setAttribute('disabled', 'disabled'),
+      onSubmit: (placeData) => placesList.addItem(createPlace(placeData)),
+      onClose: () => formAddPlace.disableSubmitButton(),
     },
   );
 
@@ -91,5 +82,5 @@ document.addEventListener('DOMContentLoaded', () => {
   buttonEditProfile.addEventListener('click', popupEditProfile.open.bind(popupEditProfile));
 
   /* run */
-  initPlaces.forEach(addPlace);
+  placesList.render();
 });

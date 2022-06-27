@@ -39,9 +39,9 @@ export class FormValidator {
   _checkFormState() {
     const isValid = this._element.fields.every(({ elementField: { validity } }) => validity.valid);
     if (isValid) {
-      this._enableSubmitButton();
+      this.enableSubmitButton();
     } else {
-      this._disableSubmitButton();
+      this.disableSubmitButton();
     }
 
     this._validityState.formIsValid = isValid;
@@ -76,24 +76,24 @@ export class FormValidator {
         return;
       }
 
-      this._disableSubmitButton();
+      this.disableSubmitButton();
       this._element.fields.forEach(({ elementField }) => {
         elementField.setAttribute('disabled', 'disabled');
       });
     });
   }
 
-  _disableSubmitButton() {
+  disableSubmitButton() {
     this._element.submit.setAttribute('disabled', 'disabled');
   }
 
-  _enableSubmitButton() {
+  enableSubmitButton() {
     this._element.submit.removeAttribute('disabled');
   }
 
   _showFieldError(elementField, elementError) {
     const { classNameFieldInvalid } = this._config;
-    elementField.classList.remove(classNameFieldInvalid);
+    elementField.classList.add(classNameFieldInvalid);
     elementError.textContent = elementField.validationMessage;
   }
 
@@ -113,15 +113,12 @@ export class FormValidator {
   }
 
   reset() {
-    const { classNameFieldInvalid } = this._config;
-
     this._element.form.reset();
     this._element.fields.forEach(({ elementField, elementError }) => {
       elementField.removeAttribute('disabled');
-      elementField.classList.remove(classNameFieldInvalid);
-      elementError.textContent = '';
+      this._hideFieldError(elementField, elementError);
     });
-    this._enableSubmitButton();
+    this.enableSubmitButton();
   }
 
   toElement() {

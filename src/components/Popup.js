@@ -1,3 +1,5 @@
+import { keyboardKeyNameMap } from '../utils.js';
+
 export class Popup {
   constructor({ selectorCloseButton, classNamePopupOpened }, elementPopup) {
     this._elementPopup = elementPopup;
@@ -9,7 +11,8 @@ export class Popup {
   }
 
   _handleEscClose(e) {
-    if (e.key === 'Escape' || e.key === 'Esc') {
+    const keyName = e.key.toLowerCase();
+    if (keyboardKeyNameMap.escape.includes(keyName)) {
       this.close();
     }
   }
