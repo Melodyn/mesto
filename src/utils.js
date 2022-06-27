@@ -8,6 +8,7 @@ export const commonFormConfig = {
 export const commonPopupConfig = {
   selectorCloseButton: '.popup__close',
   classNamePopupOpened: 'popup_opened',
+  classNameContainer: 'popup__container',
 };
 
 export const keyboardKeyNameMap = {

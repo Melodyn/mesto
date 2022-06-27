@@ -1,9 +1,10 @@
 import { keyboardKeyNameMap } from '../utils.js';
 
 export class Popup {
-  constructor({ selectorCloseButton, classNamePopupOpened }, elementPopup) {
+  constructor({ selectorCloseButton, classNamePopupOpened, classNameContainer }, elementPopup) {
     this._elementPopup = elementPopup;
     this._classNamePopupOpened = classNamePopupOpened;
+    this._classNameContainer = classNameContainer;
     this._buttonClosePopup = this._elementPopup.querySelector(selectorCloseButton);
     this._bindedHandlerEscClose = this._handleEscClose.bind(this);
     this._bindedHandlerOverlayClose = this._handleOverlayClose.bind(this);
@@ -18,7 +19,9 @@ export class Popup {
   }
 
   _handleOverlayClose(e) {
-    if (e.currentTarget === e.target) {
+    const isPopup = (e.currentTarget === e.target);
+    const isOutsideContainer = e.target.classList.contains(this._classNameContainer);
+    if (isOutsideContainer || isPopup) {
       this.close();
     }
   }
