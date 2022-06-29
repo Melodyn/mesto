@@ -5,6 +5,7 @@
   ],
   "ignoreFiles": ["src/vendor/*.css"],
   "rules": {
+    "import-notation": "url",
     "selector-class-pattern": null,
     "property-no-vendor-prefix": null,
     "value-keyword-case": null,
