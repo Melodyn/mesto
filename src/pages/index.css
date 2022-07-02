@@ -20,9 +20,11 @@
 @import url('../blocks/place/__info/place__info.css');
 @import url('../blocks/place/__image/place__image.css');
 @import url('../blocks/place/__image/_offset/place__image_offset_right-bottom.css');
-@import url('../blocks/place/__like/place__like.css');
 @import url('../blocks/place/__remove/place__remove.css');
+@import url('../blocks/place/__like-container/place__like-container.css');
+@import url('../blocks/place/__like/place__like.css');
 @import url('../blocks/place/__like/_liked/place__like_liked.css');
+@import url('../blocks/place/__like-count/place__like-count.css');
 @import url('../blocks/place/__link/place__link.css');
 
 @import url('../blocks/footer/footer.css');
@@ -30,9 +32,10 @@
 
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
-@import url('../blocks/popup/__content/popup__content.css');
-@import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/popup/__close/popup__close.css');
+@import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__container/_type/popup__container_type_form.css');
+@import url('../blocks/popup/__content/popup__content.css');
 
 @import url('../blocks/form/form.css');
 @import url('../blocks/form/__title/form__title.css');
@@ -46,3 +49,7 @@
 @import url('../blocks/popup-preview/popup-preview.css');
 @import url('../blocks/popup-preview/__image/popup-preview__image.css');
 @import url('../blocks/popup-preview/__text/popup-preview__text.css');
+
+@import url('../blocks/popup-confirm/popup-confirm.css');
+@import url('../blocks/popup-confirm/__title/popup-confirm__title.css');
+@import url('../blocks/popup-confirm/__button/popup-confirm__button.css');

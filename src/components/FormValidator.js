@@ -5,6 +5,7 @@ export class FormValidator {
       form: elementForm,
       fields: [],
       submit: null,
+      submitOriginalText: '',
     };
     this._validityState = {
       enabled: false,
@@ -23,6 +24,7 @@ export class FormValidator {
 
     const elementForm = this._element.form;
     this._element.submit = elementForm.querySelector(selectorSubmit);
+    this._element.submitOriginalText = this._element.submit.textContent;
     const fields = Array.from(elementForm.querySelectorAll(selectorField));
     this._element.fields = fields.map((elementField) => {
       const errorTextContainerSelector = getSelectorErrorTextContainer(elementField.name);
@@ -76,6 +78,7 @@ export class FormValidator {
         return;
       }
 
+      this._element.submit.textContent = 'Сохранение…';
       this.disableSubmitButton();
       this._element.fields.forEach(({ elementField }) => {
         elementField.setAttribute('disabled', 'disabled');
@@ -113,6 +116,7 @@ export class FormValidator {
   }
 
   reset() {
+    this._element.submit.textContent = this._element.submitOriginalText;
     this._element.form.reset();
     this._element.fields.forEach(({ elementField, elementError }) => {
       elementField.removeAttribute('disabled');

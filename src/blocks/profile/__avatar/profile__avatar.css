@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
   border-radius: 50%;
+  cursor: pointer;
   grid-area: image;
   justify-self: center;
   object-fit: cover;

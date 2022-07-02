@@ -33,7 +33,7 @@
     <p class="footer__copyright">&copy; 2022 Сергей Мелодин</p>
   </footer>
 
-  <div class="popup popup_type_preview" style="display: none" aria-label="Всплывающее окно">
+  <div class="popup popup_type_preview" style="display: none">
     <div class="popup__container">
       <button
         type="button"
@@ -47,8 +47,8 @@
     </div>
   </div>
 
-  <div class="popup popup_type_add-place" style="display: none" aria-label="Всплывающее окно">
-    <div class="popup__container">
+  <div class="popup popup_type_add-place" style="display: none">
+    <div class="popup__container popup__container_type_form">
       <button
         type="button"
         class="button popup__close"
@@ -59,7 +59,6 @@
         <fieldset class="form__items">
           <input
             type="text"
-            id="name"
             name="name"
             class="form__item"
             placeholder="Название"
@@ -70,7 +69,6 @@
           <span class="form__item-error form__item-error_field_name"></span>
           <input
             type="url"
-            id="link"
             name="link"
             class="form__item"
             placeholder="Ссылка на картинку"
@@ -89,8 +87,8 @@
     </div>
   </div>
 
-  <div class="popup popup_type_edit-profile" style="display: none" tabindex="0" aria-label="Всплывающее окно">
-    <div class="popup__container">
+  <div class="popup popup_type_edit-profile" style="display: none" tabindex="0">
+    <div class="popup__container popup__container_type_form">
       <button
         type="button"
         class="button popup__close"
@@ -101,7 +99,6 @@
         <fieldset class="form__items">
           <input
             type="text"
-            id="title"
             name="title"
             class="form__item"
             placeholder="Название профиля"
@@ -112,7 +109,6 @@
           <span class="form__item-error form__item-error_field_title"></span>
           <input
             type="text"
-            id="subtitle"
             name="subtitle"
             class="form__item"
             placeholder="Описание профиля"
@@ -132,6 +128,56 @@
     </div>
   </div>
 
+  <div class="popup popup_type_edit-avatar" style="display: none" tabindex="0">
+    <div class="popup__container popup__container_type_form">
+      <button
+        type="button"
+        class="button popup__close"
+        tabindex="4"
+        aria-label="Закрыть"></button>
+      <form action="/" name="avatar" class="popup__content form" tabindex="0" novalidate>
+        <h2 class="form__title">Обновить аватар</h2>
+        <fieldset class="form__items">
+          <input
+            type="url"
+            name="link"
+            class="form__item"
+            placeholder="Ссылка на изображение"
+            minlength="2"
+            maxlength="200"
+            tabindex="1"
+            required>
+          <span class="form__item-error form__item-error_field_link"></span>
+        </fieldset>
+        <button
+          type="submit"
+          name="submit"
+          class="button form__submit"
+          tabindex="2">Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_confirm" style="display: none" tabindex="0">
+    <div class="popup__container popup__container_type_form">
+      <button
+        type="button"
+        class="button popup__close"
+        tabindex="2"
+        aria-label="Закрыть"></button>
+      <div class="popup__content popup-confirm">
+        <h2 class="popup-confirm__title">Вы уверены?</h2>
+        <button
+          type="button"
+          name="confirm"
+          class="button popup-confirm__button popup-confirm__button_action_confirm"
+          tabindex="1">Да
+        </button>
+      </div>
+    </div>
+  </div>
+
   <template id="place">
     <li class="place-item">
       <article class="place" aria-label="">
@@ -141,7 +187,10 @@
             href="#"
             class="place__link"
             target="_blank"></a>
-          <button type="button" class="button place__like" aria-label="Оценить"></button>
+          <div class="place__like-container">
+            <button type="button" class="button place__like" aria-label="Оценить"></button>
+            <span class="place__like-count">0</span>
+          </div>
         </div>
         <button type="button" class="button place__remove" aria-label="Удалить"></button>
       </article>
