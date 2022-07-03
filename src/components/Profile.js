@@ -1,11 +1,11 @@
-export class UserInfo {
+export class Profile {
   constructor(elementProfileTitle, elementProfileSubtitle, elementProfileAvatar) {
     this._elementProfileTitle = elementProfileTitle;
     this._elementProfileSubtitle = elementProfileSubtitle;
     this._elementProfileAvatar = elementProfileAvatar;
   }
 
-  getUserInfo() {
+  getFullInfo() {
     return {
       title: this._elementProfileTitle.textContent,
       subtitle: this._elementProfileSubtitle.textContent,
@@ -13,12 +13,12 @@ export class UserInfo {
     };
   }
 
-  setUserInfo({ title, subtitle }) {
+  setInfo({ title, subtitle }) {
     this._elementProfileTitle.textContent = title.trim();
     this._elementProfileSubtitle.textContent = subtitle.trim();
   }
 
-  setUserAvatar({ link }) {
+  setAvatar({ link }) {
     this._elementProfileAvatar.src = link;
   }
 }

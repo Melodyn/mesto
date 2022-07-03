@@ -13,10 +13,13 @@
 
   <main class="content">
     <section class="profile" aria-label="Профиль пользователя">
-      <img
-        src="<%=require('./images/avatar.jpg')%>"
-        alt="Лицо у дерева"
-        class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img
+          src="<%=require('./images/avatar.jpg')%>"
+          alt="Аватар профиля"
+          class="profile__avatar">
+        <div class="profile__avatar-overlay"></div>
+      </div>
       <h1 class="profile__title">Природа России</h1>
       <button type="button" class="button profile__edit" aria-label="Редактировать"></button>
       <p class="profile__subtitle">Берегите природу, мать&nbsp;вашу!</p>

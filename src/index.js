@@ -6,7 +6,7 @@ import { Place } from './components/Place.js';
 import { PopupWithImage } from './components/Popup/PopupWithImage.js';
 import { PopupWithForm } from './components/Popup/PopupWithForm.js';
 // import { PopupConfirm } from './components/Popup/PopupConfirm.js';
-import { UserInfo } from './components/UserInfo.js';
+import { Profile } from './components/Profile.js';
 import { Section } from './components/Section.js';
 
 /* app */
@@ -66,7 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementProfileTitle = document.querySelector('.profile__title');
   const elementProfileSubtitle = document.querySelector('.profile__subtitle');
   const elementProfileAvatar = document.querySelector('.profile__avatar');
-  const userInfo = new UserInfo(elementProfileTitle, elementProfileSubtitle, elementProfileAvatar);
+  const elementProfileAvatarContainer = document.querySelector('.profile__avatar-container');
+  const profile = new Profile(elementProfileTitle, elementProfileSubtitle, elementProfileAvatar);
 
   const formEditProfile = new FormValidator(commonFormConfig, document.forms.profile);
   formEditProfile.enableValidation();
@@ -83,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
     commonFormConfig,
     formEditProfile,
     {
-      onSubmit: userInfo.setUserInfo.bind(userInfo),
+      onSubmit: profile.setInfo.bind(profile),
       onOpen: () => {
-        const { title, subtitle } = userInfo.getUserInfo();
+        const { title, subtitle } = profile.getFullInfo();
         elementFormEditProfile.title.value = title;
         elementFormEditProfile.subtitle.value = subtitle;
       },
@@ -97,16 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
     commonFormConfig,
     formEditAvatar,
     {
-      onSubmit: userInfo.setUserAvatar.bind(userInfo),
+      onSubmit: profile.setAvatar.bind(profile),
       onOpen: () => {
-        const { avatar } = userInfo.getUserInfo();
+        const { avatar } = profile.getFullInfo();
         elementFormEditAvatar.link.value = avatar;
       },
     },
   );
 
   buttonEditProfile.addEventListener('click', popupEditProfile.open.bind(popupEditProfile));
-  elementProfileAvatar.addEventListener('click', popupEditAvatar.open.bind(popupEditAvatar));
+  elementProfileAvatarContainer.addEventListener('click', popupEditAvatar.open.bind(popupEditAvatar));
 
   /* run */
   placesList.render();
