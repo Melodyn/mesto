@@ -6,7 +6,7 @@ import {
   appConfig,
   // eslint-disable-next-line
   dataJSON,
-} from './utils/contstants.js';
+} from './utils/constants.js';
 import { FormValidator } from './components/FormValidator.js';
 import { Place } from './components/Place.js';
 import { PopupWithImage } from './components/Popup/PopupWithImage.js';
