@@ -18,7 +18,7 @@ export class Profile {
     this._elementProfileSubtitle.textContent = subtitle.trim();
   }
 
-  setAvatar({ link }) {
-    this._elementProfileAvatar.src = link;
+  setAvatar({ avatar }) {
+    this._elementProfileAvatar.src = avatar;
   }
 }

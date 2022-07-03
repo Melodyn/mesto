@@ -47,9 +47,10 @@ export const keyboardKeyNameMap = {
   escape: ['escape', 'esc'],
 };
 
+// Фикстура для локальной разработки
 export const dataJSON = {
   profile: {
-    name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
   },
   places: [{
     likes: [{
@@ -63,7 +64,7 @@ export const dataJSON = {
     }, {
       name: 'Кирилл Корнеев', about: 'физик', avatar: 'https://i.imgur.com/vvBNLTg.jpg', _id: 'f6316c5f74330810ff7bc7cc', cohort: 'cohort-14',
     }, {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     }],
     _id: '5d208fb50fdbbf001ffdf72a',
     name: 'Иваново',
@@ -321,27 +322,18 @@ export const dataJSON = {
     name: 'Белый медведь',
     link: 'https://sun9-16.userapi.com/impg/bpSgHwkbIPzWxzwy-TvahT7XtdvHLgmeVYDLIQ/yVbtPBR9wVY.jpg?size=604x441&quality=96&sign=7a68a44f70b0c4b1b46c9c18f1dd3529&type=album',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-03-03T22:27:00.321Z',
   }, {
-    likes: [],
-    _id: '622146040ae07c013db51074',
-    name: 'qwe',
-    link: 'https://sun9-16.userapi.com/impg/bpSgHwkbIPzWxzwy-TvahT7XtdvHLgmeVYDLIQ/yVbtPBR9wVY.jpg?size=604x441&quality=96&sign=7a68a44f70b0c4b1b46c9c18f1dd3529&type=album',
-    owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
-    },
-    createdAt: '2022-03-03T22:49:40.011Z',
-  }, {
     likes: [{
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     }],
     _id: '62230e720ae07c013db71818',
     name: 'Stars',
     link: 'https://images.unsplash.com/photo-1646408271576-bf925295d130?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-03-05T07:17:06.974Z',
   }, {
@@ -350,7 +342,7 @@ export const dataJSON = {
     name: 'Masons',
     link: 'https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-03-05T08:30:35.274Z',
   }, {
@@ -359,7 +351,7 @@ export const dataJSON = {
     name: 'qwe',
     link: 'https://sun9-16.userapi.com/impg/bpSgHwkbIPzWxzwy-TvahT7XtdvHLgmeVYDLIQ/yVbtPBR9wVY.jpg?size=604x441&quality=96&sign=7a68a44f70b0c4b1b46c9c18f1dd3529&type=album',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-03-06T04:25:09.816Z',
   }, {
@@ -368,7 +360,7 @@ export const dataJSON = {
     name: 'network',
     link: 'https://images.unsplash.com/photo-1622351707507-720185373b31?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-05-27T21:02:03.486Z',
   }, {
@@ -377,25 +369,16 @@ export const dataJSON = {
     name: 'network',
     link: 'https://st2.depositphotos.com/1064024/10769/i/600/depositphotos_107694484-stock-photo-little-boy.jpg',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-05-31T08:59:04.204Z',
-  }, {
-    likes: [],
-    _id: '62a890af7714be031beeab97',
-    name: 'sad',
-    link: 'https://images.unsplash.com/photo-1655201820196-bded3e9bd271?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
-    owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
-    },
-    createdAt: '2022-06-14T13:44:15.945Z',
   }, {
     likes: [],
     _id: '62a890d159e69303773de7e8',
     name: 'Картинка',
     link: 'https://images.unsplash.com/photo-1655201820196-bded3e9bd271?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-14T13:44:49.015Z',
   }, {
@@ -404,7 +387,7 @@ export const dataJSON = {
     name: 'test',
     link: 'https://skr.sh/i/140622/7qHYgCGe.jpg?download=1&name=%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82%2015-06-2022%2000:19:58.jpg',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-14T21:27:15.270Z',
   }, {
@@ -413,26 +396,28 @@ export const dataJSON = {
     name: 'candles',
     link: 'https://mobimg.b-cdn.net/v3/fetch/5a/5a5a8f24a96476801358bb7f70b677fd.jpeg?h=1200&r=0.5',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-27T13:34:42.920Z',
   }, {
-    likes: [],
+    likes: [{
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    }],
     _id: '62b9ef36b585b1045ea96d76',
     name: 'Сингапур',
     link: 'https://horosho-tam.ru/pics/00/da/5aae306ffc897a4674cbda00.jpg',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-27T17:56:06.607Z',
   }, {
     likes: [],
-    _id: '62bf55473cad9a04b79b72a0',
-    name: 'adsdasd',
-    link: 'https://yandex.ru/search/?text=prepend&clid=1955453&win=514&lr=213',
+    _id: '62c1dc045d4c8004ffe54291',
+    name: 'Мурманск',
+    link: 'https://melodyn.github.io/mesto/0a818caa34891b0cf663.jpg',
     owner: {
-      name: 'Julian Fen', about: 'Software Engineer', avatar: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
-    createdAt: '2022-07-01T20:12:55.303Z',
+    createdAt: '2022-07-03T18:12:20.806Z',
   }],
 };

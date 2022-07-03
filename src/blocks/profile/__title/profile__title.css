@@ -16,7 +16,6 @@
     max-width: 260px;
     padding: 0;
     font-size: 27px;
-    justify-self: end;
     line-height: calc(1 / 27 * 33);
   }
 }

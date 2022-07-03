@@ -1,4 +1,10 @@
 import './pages/index.css';
+// eslint-disable-next-line
+import avatarImage from './images/avatar.jpg';
+// eslint-disable-next-line
+import faviconImage from './images/favicon.ico';
+
+// helpers
 import {
   commonFormConfig,
   commonPopupConfig,
@@ -7,14 +13,16 @@ import {
   // eslint-disable-next-line
   dataJSON,
 } from './utils/constants.js';
-import { FormValidator } from './components/FormValidator.js';
+import { ApiMesto } from './utils/ApiMesto.js';
+
+// components
+import { FormValidator } from './utils/FormValidator.js';
 import { Place } from './components/Place.js';
 import { PopupWithImage } from './components/Popup/PopupWithImage.js';
 import { PopupWithForm } from './components/Popup/PopupWithForm.js';
 import { PopupConfirm } from './components/Popup/PopupConfirm.js';
 import { Profile } from './components/Profile.js';
 import { Section } from './components/Section.js';
-import { ApiMesto } from './utils/ApiMesto.js';
 
 /* app */
 const run = (appData, serviceApiMesto) => {
@@ -44,17 +52,28 @@ const run = (appData, serviceApiMesto) => {
   );
 
   const createPlace = (placeData) => {
+    placeData.removable = placeData.owner._id === appData.profile._id;
+    placeData.liked = placeData.likes
+      .some((liker) => liker._id === appData.profile._id);
+
     const place = new Place(placeData, commonPlaceConfig, {
       onClick: (currentPlaceData) => {
         popupPreviewImage.open(currentPlaceData);
       },
-      onRemove: (removeCallback) => {
-        popupConfirmRemovePlace.setConfirmAction(removeCallback);
+      onRemove: (currentPlaceData, removeCallback) => {
+        const sendRemoveRequest = () => serviceApiMesto
+          .placeRemove({
+            cardId: currentPlaceData._id,
+          })
+          .then(() => removeCallback())
+          .catch(() => popupConfirmRemovePlace.close());
+
+        popupConfirmRemovePlace.setConfirmAction(sendRemoveRequest);
         popupConfirmRemovePlace.open();
       },
       onLike: (currentPlaceData, likeCallback) => {
         serviceApiMesto
-          .like({
+          .placeLike({
             cardId: currentPlaceData._id,
             liked: currentPlaceData.liked,
           })
@@ -64,12 +83,7 @@ const run = (appData, serviceApiMesto) => {
     return place.toElement();
   };
   const placesList = new Section({
-    items: appData.places.map((place) => {
-      place.removable = place.owner._id === appData.profile._id;
-      place.liked = place.likes
-        .some((liker) => liker._id === appData.profile._id);
-      return place;
-    }),
+    items: appData.places,
     renderer: (placeData) => placesList.addItem(createPlace(placeData)),
   }, elementPlacesList);
 
@@ -84,7 +98,9 @@ const run = (appData, serviceApiMesto) => {
     commonFormConfig,
     formAddPlace,
     {
-      onSubmit: (placeData) => placesList.addItem(createPlace(placeData)),
+      onSubmit: (placeSourceData) => serviceApiMesto
+        .placeCreate(placeSourceData)
+        .then((placeData) => placesList.addItem(createPlace(placeData))),
       onClose: () => formAddPlace.disableSubmitButton(),
     },
   );
@@ -116,7 +132,12 @@ const run = (appData, serviceApiMesto) => {
     commonFormConfig,
     formEditProfile,
     {
-      onSubmit: (data) => profile.setInfo(data),
+      onSubmit: (data) => serviceApiMesto
+        .setInfo({
+          name: data.title,
+          about: data.subtitle,
+        })
+        .then(() => profile.setInfo(data)),
       onOpen: () => {
         const { title, subtitle } = profile.getFullInfo();
         elementFormEditProfile.title.value = title;
@@ -130,10 +151,12 @@ const run = (appData, serviceApiMesto) => {
     commonFormConfig,
     formEditAvatar,
     {
-      onSubmit: (data) => profile.setAvatar(data),
+      onSubmit: (data) => serviceApiMesto
+        .setAvatar(data)
+        .then(() => profile.setAvatar(data)),
       onOpen: () => {
         const { avatar } = profile.getFullInfo();
-        elementFormEditAvatar.link.value = avatar;
+        elementFormEditAvatar.avatar.value = avatar;
       },
     },
   );
@@ -151,14 +174,14 @@ const run = (appData, serviceApiMesto) => {
     subtitle: appData.profile.about,
   });
   profile.setAvatar({
-    link: appData.profile.avatar,
+    avatar: appData.profile.avatar,
   });
   placesList.render();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   const serviceApiMesto = new ApiMesto(appConfig);
-  // run(dataJSON, serviceApiMesto);
+  // run(dataJSON, serviceApiMesto); // Фикстура для локальной разработки
   serviceApiMesto.getProfile()
     .then((profile) => serviceApiMesto
       .getPlaces()

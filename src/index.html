@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" sizes="16x16" href="<%=require('./images/favicon.ico')%>">
-  <title>Русограм: инстаграм российских мест</title>
+  <title>Меместо: место ваших мемов</title>
 </head>
 <body class="page">
   <header class="header">
@@ -12,21 +12,21 @@
   </header>
 
   <main class="content">
-    <section class="profile" aria-label="Профиль пользователя">
+    <section class="profile" aria-label="Описание блога">
       <div class="profile__avatar-container">
         <img
           src="<%=require('./images/avatar.jpg')%>"
-          alt="Аватар профиля"
+          alt="Аватар блога"
           class="profile__avatar">
         <div class="profile__avatar-overlay"></div>
       </div>
-      <h1 class="profile__title">Природа России</h1>
+      <h1 class="profile__title">Меместо</h1>
       <button type="button" class="button profile__edit" aria-label="Редактировать"></button>
-      <p class="profile__subtitle">Берегите природу, мать&nbsp;вашу!</p>
+      <p class="profile__subtitle">Место ваших мемов</p>
       <button type="button" class="button profile__add-place" aria-label="Добавить место"></button>
     </section>
 
-    <section class="places" aria-label="Места России">
+    <section class="places" aria-label="Красивые картинки">
       <ul class="places__list">
       </ul>
     </section>
@@ -143,14 +143,14 @@
         <fieldset class="form__items">
           <input
             type="url"
-            name="link"
+            name="avatar"
             class="form__item"
             placeholder="Ссылка на изображение"
             minlength="2"
             maxlength="200"
             tabindex="1"
             required>
-          <span class="form__item-error form__item-error_field_link"></span>
+          <span class="form__item-error form__item-error_field_avatar"></span>
         </fieldset>
         <button
           type="submit"

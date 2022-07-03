@@ -64,7 +64,8 @@ export class Place {
 
     if (this._element.remove !== null) {
       this._element.remove.addEventListener('click', () => {
-        this._onRemoveHandler(() => this._handlerRemove());
+        const placeDataCopy = { ...this._place };
+        this._onRemoveHandler(placeDataCopy, () => this._handlerRemove());
       });
     }
 
