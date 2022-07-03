@@ -2,8 +2,9 @@ export class Place {
   constructor(placeData, config, handler) {
     this._place = placeData;
     this._config = config;
-    this._imageClickHandler = handler.onClick;
-    this._placeRemoveHandler = handler.onRemove;
+    this._onClickHandler = handler.onClick;
+    this._onRemoveHandler = handler.onRemove;
+    this._onLikeHandler = handler.onLike;
     this._template = this._getTemplate();
     this._element = this._createElement();
     this._setListeners();
@@ -17,7 +18,9 @@ export class Place {
   }
 
   _createElement() {
-    const { name, link, likeCount } = this._place;
+    const {
+      name, link, likes, liked, removable,
+    } = this._place;
     const config = this._config;
     const element = {
       container: null,
@@ -36,13 +39,20 @@ export class Place {
     element.like = element.place.querySelector(config.getSelectorLike());
     element.likeCount = element.place.querySelector(config.getSelectorLikeCount());
     element.remove = element.place.querySelector(config.getSelectorRemove());
+    if (!removable) {
+      element.remove.remove();
+      element.remove = null;
+    }
 
     element.place.setAttribute('aria-label', name);
     element.image.setAttribute('alt', name);
     element.image.setAttribute('src', link);
     element.link.setAttribute('href', link);
     element.link.textContent = name;
-    element.likeCount.textContent = likeCount;
+    element.likeCount.textContent = likes.length;
+    if (liked) {
+      element.like.classList.add(config.getClassNameLiked());
+    }
 
     return element;
   }
@@ -52,26 +62,27 @@ export class Place {
       this._handlerLike();
     });
 
-    this._element.remove.addEventListener('click', () => {
-      this._placeRemoveHandler(() => this._handlerRemove());
-    });
+    if (this._element.remove !== null) {
+      this._element.remove.addEventListener('click', () => {
+        this._onRemoveHandler(() => this._handlerRemove());
+      });
+    }
 
     this._element.image.addEventListener('click', () => {
-      this._imageClickHandler(this._place);
+      const placeDataCopy = { ...this._place };
+      this._onClickHandler(placeDataCopy);
     });
-  }
-
-  _incrementLikeCount() {
-    this._place.likeCount += 1;
-    this._element.likeCount.textContent = this._place.likeCount;
   }
 
   _handlerLike() {
-    const classNameLiked = this._config.getClassNameLiked();
-    this._element.like.classList.toggle(classNameLiked);
-    if (this._element.like.classList.contains(classNameLiked)) {
-      this._incrementLikeCount();
-    }
+    const placeDataCopy = { ...this._place };
+    this._onLikeHandler(placeDataCopy, (updatedLikes) => {
+      this._place.liked = !this._place.liked;
+      this._place.likes = updatedLikes;
+      const classNameLiked = this._config.getClassNameLiked();
+      this._element.like.classList.toggle(classNameLiked);
+      this._element.likeCount.textContent = this._place.likes.length;
+    });
   }
 
   _handlerRemove() {

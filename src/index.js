@@ -1,6 +1,12 @@
 import './pages/index.css';
-import { initPlaces } from './vendor/places.js';
-import { commonFormConfig, commonPopupConfig, commonPlaceConfig } from './contstants.js';
+import {
+  commonFormConfig,
+  commonPopupConfig,
+  commonPlaceConfig,
+  appConfig,
+  // eslint-disable-next-line
+  dataJSON,
+} from './utils/contstants.js';
 import { FormValidator } from './components/FormValidator.js';
 import { Place } from './components/Place.js';
 import { PopupWithImage } from './components/Popup/PopupWithImage.js';
@@ -8,9 +14,10 @@ import { PopupWithForm } from './components/Popup/PopupWithForm.js';
 import { PopupConfirm } from './components/Popup/PopupConfirm.js';
 import { Profile } from './components/Profile.js';
 import { Section } from './components/Section.js';
+import { ApiMesto } from './utils/ApiMesto.js';
 
 /* app */
-document.addEventListener('DOMContentLoaded', () => {
+const run = (appData, serviceApiMesto) => {
   /* popups */
   const elementPopupAddPlace = document.querySelector('.popup_type_add-place');
   const elementPopupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -35,21 +42,34 @@ document.addEventListener('DOMContentLoaded', () => {
       selectorTextContainer: '.popup-preview__text',
     },
   );
-  const previewPlace = popupPreviewImage.open.bind(popupPreviewImage);
 
   const createPlace = (placeData) => {
-    placeData.likeCount = Math.round(Math.random() * 999 + 1);
     const place = new Place(placeData, commonPlaceConfig, {
-      onClick: previewPlace,
+      onClick: (currentPlaceData) => {
+        popupPreviewImage.open(currentPlaceData);
+      },
       onRemove: (removeCallback) => {
         popupConfirmRemovePlace.setConfirmAction(removeCallback);
         popupConfirmRemovePlace.open();
+      },
+      onLike: (currentPlaceData, likeCallback) => {
+        serviceApiMesto
+          .like({
+            cardId: currentPlaceData._id,
+            liked: currentPlaceData.liked,
+          })
+          .then((updatedPlace) => likeCallback(updatedPlace.likes));
       },
     });
     return place.toElement();
   };
   const placesList = new Section({
-    items: initPlaces,
+    items: appData.places.map((place) => {
+      place.removable = place.owner._id === appData.profile._id;
+      place.liked = place.likes
+        .some((liker) => liker._id === appData.profile._id);
+      return place;
+    }),
     renderer: (placeData) => placesList.addItem(createPlace(placeData)),
   }, elementPlacesList);
 
@@ -69,7 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   );
 
-  buttonAddPlace.addEventListener('click', popupAddPlace.open.bind(popupAddPlace));
+  buttonAddPlace.addEventListener('click', () => {
+    popupAddPlace.open();
+  });
 
   /* edit profile */
   const buttonEditProfile = document.querySelector('.profile__edit');
@@ -124,5 +146,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* run */
+  profile.setInfo({
+    title: appData.profile.name,
+    subtitle: appData.profile.about,
+  });
+  profile.setAvatar({
+    link: appData.profile.avatar,
+  });
   placesList.render();
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const serviceApiMesto = new ApiMesto(appConfig);
+  // run(dataJSON, serviceApiMesto);
+  serviceApiMesto.getProfile()
+    .then((profile) => serviceApiMesto
+      .getPlaces()
+      .then((places) => ({ profile, places })))
+    .then((data) => run(data, serviceApiMesto))
+    // eslint-disable-next-line
+    .catch((err) => alert(err.message));
 });

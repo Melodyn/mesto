@@ -1,4 +1,4 @@
-import { keyboardKeyNameMap } from '../../contstants.js';
+import { keyboardKeyNameMap } from '../../utils/contstants.js';
 
 export class Popup {
   constructor({ selectorCloseButton, classNamePopupOpened, classNameContainer }, elementPopup) {
