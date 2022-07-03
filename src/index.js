@@ -1,11 +1,11 @@
 import './pages/index.css';
 import { initPlaces } from './vendor/places.js';
-import { commonFormConfig, commonPopupConfig } from './utils.js';
+import { commonFormConfig, commonPopupConfig, commonPlaceConfig } from './contstants.js';
 import { FormValidator } from './components/FormValidator.js';
 import { Place } from './components/Place.js';
 import { PopupWithImage } from './components/Popup/PopupWithImage.js';
 import { PopupWithForm } from './components/Popup/PopupWithForm.js';
-// import { PopupConfirm } from './components/Popup/PopupConfirm.js';
+import { PopupConfirm } from './components/Popup/PopupConfirm.js';
 import { Profile } from './components/Profile.js';
 import { Section } from './components/Section.js';
 
@@ -16,14 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const elementPopupEditProfile = document.querySelector('.popup_type_edit-profile');
   const elementPopupEditAvatar = document.querySelector('.popup_type_edit-avatar');
   const elementPopupPreviewImage = document.querySelector('.popup_type_preview');
-  // const elementPopupConfirm = document.querySelector('.popup_type_confirm');
+  const elementPopupConfirm = document.querySelector('.popup_type_confirm');
 
   /* place */
   const elementPlacesList = document.querySelector('.places__list');
-  // const popupConfirm = new PopupConfirm(
-  //   commonPopupConfig,
-  //   elementPopupConfirm,
-  // );
+  const popupConfirmRemovePlace = new PopupConfirm(
+    commonPopupConfig,
+    elementPopupConfirm,
+    {
+      selectorConfirm: '.popup-confirm__button_action_confirm',
+    },
+  );
   const popupPreviewImage = new PopupWithImage(
     commonPopupConfig,
     elementPopupPreviewImage,
@@ -35,7 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const previewPlace = popupPreviewImage.open.bind(popupPreviewImage);
 
   const createPlace = (placeData) => {
-    const place = new Place(placeData, '#place', previewPlace);
+    placeData.likeCount = Math.round(Math.random() * 999 + 1);
+    const place = new Place(placeData, commonPlaceConfig, {
+      onClick: previewPlace,
+      onRemove: (removeCallback) => {
+        popupConfirmRemovePlace.setConfirmAction(removeCallback);
+        popupConfirmRemovePlace.open();
+      },
+    });
     return place.toElement();
   };
   const placesList = new Section({
@@ -84,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     commonFormConfig,
     formEditProfile,
     {
-      onSubmit: profile.setInfo.bind(profile),
+      onSubmit: (data) => profile.setInfo(data),
       onOpen: () => {
         const { title, subtitle } = profile.getFullInfo();
         elementFormEditProfile.title.value = title;
@@ -98,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     commonFormConfig,
     formEditAvatar,
     {
-      onSubmit: profile.setAvatar.bind(profile),
+      onSubmit: (data) => profile.setAvatar(data),
       onOpen: () => {
         const { avatar } = profile.getFullInfo();
         elementFormEditAvatar.link.value = avatar;
@@ -106,8 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   );
 
-  buttonEditProfile.addEventListener('click', popupEditProfile.open.bind(popupEditProfile));
-  elementProfileAvatarContainer.addEventListener('click', popupEditAvatar.open.bind(popupEditAvatar));
+  buttonEditProfile.addEventListener('click', () => {
+    popupEditProfile.open();
+  });
+  elementProfileAvatarContainer.addEventListener('click', () => {
+    popupEditAvatar.open();
+  });
 
   /* run */
   placesList.render();

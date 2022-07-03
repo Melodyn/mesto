@@ -1,8 +1,9 @@
 export class Place {
-  constructor(placeData, templateSelector, imageClickHandler) {
+  constructor(placeData, config, handler) {
     this._place = placeData;
-    this._templateSelector = templateSelector;
-    this._imageClickHandler = imageClickHandler;
+    this._config = config;
+    this._imageClickHandler = handler.onClick;
+    this._placeRemoveHandler = handler.onRemove;
     this._template = this._getTemplate();
     this._element = this._createElement();
     this._setListeners();
@@ -10,14 +11,14 @@ export class Place {
 
   _getTemplate() {
     return document
-      .querySelector(this._templateSelector)
+      .querySelector(this._config.selectorTemplate)
       .content
       .firstElementChild;
   }
 
   _createElement() {
-    const selector = this._templateSelector.slice(1);
-    const { name, link } = this._place;
+    const { name, link, likeCount } = this._place;
+    const config = this._config;
     const element = {
       container: null,
       place: null,
@@ -25,20 +26,23 @@ export class Place {
       link: null,
       like: null,
       remove: null,
+      likeCount: null,
     };
 
     element.container = this._template.cloneNode(true);
-    element.place = element.container.querySelector(`.${selector}`);
-    element.image = element.place.querySelector(`.${selector}__image`);
-    element.link = element.place.querySelector(`.${selector}__link`);
-    element.like = element.place.querySelector(`.${selector}__like`);
-    element.remove = element.place.querySelector(`.${selector}__remove`);
+    element.place = element.container.querySelector(config.selectorPlace);
+    element.image = element.place.querySelector(config.getSelectorImage());
+    element.link = element.place.querySelector(config.getSelectorLink());
+    element.like = element.place.querySelector(config.getSelectorLike());
+    element.likeCount = element.place.querySelector(config.getSelectorLikeCount());
+    element.remove = element.place.querySelector(config.getSelectorRemove());
 
     element.place.setAttribute('aria-label', name);
     element.image.setAttribute('alt', name);
     element.image.setAttribute('src', link);
     element.link.setAttribute('href', link);
     element.link.textContent = name;
+    element.likeCount.textContent = likeCount;
 
     return element;
   }
@@ -49,7 +53,7 @@ export class Place {
     });
 
     this._element.remove.addEventListener('click', () => {
-      this._handlerRemove();
+      this._placeRemoveHandler(() => this._handlerRemove());
     });
 
     this._element.image.addEventListener('click', () => {
@@ -57,9 +61,17 @@ export class Place {
     });
   }
 
+  _incrementLikeCount() {
+    this._place.likeCount += 1;
+    this._element.likeCount.textContent = this._place.likeCount;
+  }
+
   _handlerLike() {
-    const selector = this._templateSelector.slice(1);
-    this._element.like.classList.toggle(`${selector}__like_liked`);
+    const classNameLiked = this._config.getClassNameLiked();
+    this._element.like.classList.toggle(classNameLiked);
+    if (this._element.like.classList.contains(classNameLiked)) {
+      this._incrementLikeCount();
+    }
   }
 
   _handlerRemove() {
