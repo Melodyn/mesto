@@ -10,11 +10,25 @@ export class PopupWithConfirmation extends Popup {
     this._setEventListeners();
   }
 
+  disableConfirmButton() {
+    this._element.confirm.setAttribute('disabled', 'disabled');
+  }
+
+  enableConfirmButton() {
+    this._element.confirm.removeAttribute('disabled');
+  }
+
   _setEventListeners() {
     this._element.confirm.addEventListener('click', () => {
+      this.disableConfirmButton();
       this._confirmAction();
     });
     super._setEventListeners();
+  }
+
+  open() {
+    this.enableConfirmButton();
+    super.open();
   }
 
   setConfirmAction(action) {
