@@ -1,8 +1,9 @@
 export class Profile {
-  constructor(elementProfileTitle, elementProfileSubtitle, elementProfileAvatar) {
+  constructor(elementProfileTitle, elementProfileSubtitle, elementProfileAvatar, elementPageTitle) {
     this._elementProfileTitle = elementProfileTitle;
     this._elementProfileSubtitle = elementProfileSubtitle;
     this._elementProfileAvatar = elementProfileAvatar;
+    this._elementPageTitle = elementPageTitle;
   }
 
   getFullInfo() {
@@ -14,8 +15,11 @@ export class Profile {
   }
 
   setInfo({ title, subtitle }) {
-    this._elementProfileTitle.textContent = title.trim();
-    this._elementProfileSubtitle.textContent = subtitle.trim();
+    const preparedTitle = title.trim();
+    const preparedSubtitle = subtitle.trim();
+    this._elementProfileTitle.textContent = preparedTitle;
+    this._elementProfileSubtitle.textContent = preparedSubtitle;
+    this._elementPageTitle.textContent = `${preparedTitle}: ${preparedSubtitle}`;
   }
 
   setAvatar({ avatar }) {

@@ -111,11 +111,17 @@ const run = (appData, serviceApiMesto) => {
 
   /* edit profile */
   const buttonEditProfile = document.querySelector('.profile__edit');
+  const elementPageTitle = document.querySelector('head > title');
   const elementProfileTitle = document.querySelector('.profile__title');
   const elementProfileSubtitle = document.querySelector('.profile__subtitle');
   const elementProfileAvatar = document.querySelector('.profile__avatar');
   const elementProfileAvatarContainer = document.querySelector('.profile__avatar-container');
-  const profile = new Profile(elementProfileTitle, elementProfileSubtitle, elementProfileAvatar);
+  const profile = new Profile(
+    elementProfileTitle,
+    elementProfileSubtitle,
+    elementProfileAvatar,
+    elementPageTitle,
+  );
 
   const formEditProfile = new FormValidator(commonFormConfig, document.forms.profile);
   formEditProfile.enableValidation();

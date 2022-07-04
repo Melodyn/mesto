@@ -2,9 +2,6 @@ export const appConfig = {
   apiMestoBaseURL: 'https://nomoreparties.co',
   apiMestoCohort: 'cohort0',
   apiMestoToken: '80a75492-21c5-4330-a02f-308029e94b63',
-  // apiMestoBaseURL: 'https://mesto.nomoreparties.co/v1',
-  // apiMestoCohort: 'cohort-42',
-  // apiMestoToken: '622cedbc-a041-41b2-ac81-42db94da4679',
 };
 
 export const commonFormConfig = {
@@ -47,10 +44,18 @@ export const keyboardKeyNameMap = {
   escape: ['escape', 'esc'],
 };
 
+export const httpMethod = {
+  get: 'GET',
+  put: 'PUT',
+  post: 'POST',
+  patch: 'PATCH',
+  delete: 'DELETE',
+};
+
 // Фикстура для локальной разработки
 export const dataJSON = {
   profile: {
-    name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
   },
   places: [{
     likes: [{
@@ -63,8 +68,6 @@ export const dataJSON = {
       name: 'Man', about: 'testovich', avatar: 'https://i.ytimg.com/vi/hhO7aw9JUlU/maxresdefault.jpg', _id: '8f1f4c5f62257224904b0b69', cohort: 'cohort-13',
     }, {
       name: 'Кирилл Корнеев', about: 'физик', avatar: 'https://i.imgur.com/vvBNLTg.jpg', _id: 'f6316c5f74330810ff7bc7cc', cohort: 'cohort-14',
-    }, {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     }],
     _id: '5d208fb50fdbbf001ffdf72a',
     name: 'Иваново',
@@ -322,18 +325,18 @@ export const dataJSON = {
     name: 'Белый медведь',
     link: 'https://sun9-16.userapi.com/impg/bpSgHwkbIPzWxzwy-TvahT7XtdvHLgmeVYDLIQ/yVbtPBR9wVY.jpg?size=604x441&quality=96&sign=7a68a44f70b0c4b1b46c9c18f1dd3529&type=album',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-03-03T22:27:00.321Z',
   }, {
     likes: [{
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     }],
     _id: '62230e720ae07c013db71818',
     name: 'Stars',
     link: 'https://images.unsplash.com/photo-1646408271576-bf925295d130?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-03-05T07:17:06.974Z',
   }, {
@@ -342,25 +345,16 @@ export const dataJSON = {
     name: 'Masons',
     link: 'https://images.unsplash.com/photo-1638913658179-18c9a9c943f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-03-05T08:30:35.274Z',
-  }, {
-    likes: [],
-    _id: '622437a50ae07c013dc17604',
-    name: 'qwe',
-    link: 'https://sun9-16.userapi.com/impg/bpSgHwkbIPzWxzwy-TvahT7XtdvHLgmeVYDLIQ/yVbtPBR9wVY.jpg?size=604x441&quality=96&sign=7a68a44f70b0c4b1b46c9c18f1dd3529&type=album',
-    owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
-    },
-    createdAt: '2022-03-06T04:25:09.816Z',
   }, {
     likes: [],
     _id: '62913c4be1f65b00121e0dd8',
     name: 'network',
     link: 'https://images.unsplash.com/photo-1622351707507-720185373b31?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-05-27T21:02:03.486Z',
   }, {
@@ -369,7 +363,7 @@ export const dataJSON = {
     name: 'network',
     link: 'https://st2.depositphotos.com/1064024/10769/i/600/depositphotos_107694484-stock-photo-little-boy.jpg',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-05-31T08:59:04.204Z',
   }, {
@@ -378,7 +372,7 @@ export const dataJSON = {
     name: 'Картинка',
     link: 'https://images.unsplash.com/photo-1655201820196-bded3e9bd271?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-14T13:44:49.015Z',
   }, {
@@ -387,7 +381,7 @@ export const dataJSON = {
     name: 'test',
     link: 'https://skr.sh/i/140622/7qHYgCGe.jpg?download=1&name=%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82%2015-06-2022%2000:19:58.jpg',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-14T21:27:15.270Z',
   }, {
@@ -396,28 +390,73 @@ export const dataJSON = {
     name: 'candles',
     link: 'https://mobimg.b-cdn.net/v3/fetch/5a/5a5a8f24a96476801358bb7f70b677fd.jpeg?h=1200&r=0.5',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-27T13:34:42.920Z',
   }, {
     likes: [{
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     }],
     _id: '62b9ef36b585b1045ea96d76',
     name: 'Сингапур',
     link: 'https://horosho-tam.ru/pics/00/da/5aae306ffc897a4674cbda00.jpg',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
     createdAt: '2022-06-27T17:56:06.607Z',
   }, {
     likes: [],
-    _id: '62c1dc045d4c8004ffe54291',
-    name: 'Мурманск',
-    link: 'https://melodyn.github.io/mesto/0a818caa34891b0cf663.jpg',
+    _id: '62c1e3155d4c8004ffe56eb3',
+    name: 'Rage Comics',
+    link: 'https://memepedia.ru/wp-content/uploads/2017/03/rage-comics.jpg',
     owner: {
-      name: 'Природа планеты', about: 'Берегите природу, мать вашу!', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
     },
-    createdAt: '2022-07-03T18:12:20.806Z',
+    createdAt: '2022-07-03T18:42:29.766Z',
+  }, {
+    likes: [],
+    _id: '62c1e38225e9500553fea081',
+    name: 'Гарольд, скрывающий боль',
+    link: 'https://memepedia.ru/wp-content/uploads/2016/03/hide-the-pain-harold.jpg',
+    owner: {
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    },
+    createdAt: '2022-07-03T18:44:18.418Z',
+  }, {
+    likes: [],
+    _id: '62c1e3ad2bb022055f668b05',
+    name: 'Лягушонок Пепе',
+    link: 'https://memepedia.ru/wp-content/uploads/2016/07/GaecXsgZG8Y.jpg',
+    owner: {
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    },
+    createdAt: '2022-07-03T18:45:01.603Z',
+  }, {
+    likes: [],
+    _id: '62c1e3ebccd49b0547e9a146',
+    name: 'ЪУЪ Съука',
+    link: 'https://memepedia.ru/wp-content/uploads/2019/03/u-suka-10.jpg',
+    owner: {
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    },
+    createdAt: '2022-07-03T18:46:03.569Z',
+  }, {
+    likes: [],
+    _id: '62c1e464ccd49b0547e9a3e9',
+    name: 'Рисованные мемы',
+    link: 'https://memepedia.ru/wp-content/uploads/2018/06/za-mamu-za-papu-mem-12.jpg',
+    owner: {
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    },
+    createdAt: '2022-07-03T18:48:04.811Z',
+  }, {
+    likes: [],
+    _id: '62c1e48f5d4c8004ffe577b0',
+    name: 'Фотомемы',
+    link: 'https://memepedia.ru/wp-content/uploads/2019/08/screenshot_17-2-768x500.png',
+    owner: {
+      name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    },
+    createdAt: '2022-07-03T18:48:47.532Z',
   }],
 };
