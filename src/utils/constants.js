@@ -5,6 +5,7 @@ export const appConfig = {
 };
 
 export const commonFormConfig = {
+  selectorForm: '.form',
   selectorField: '.form__item',
   selectorSubmit: '.form__submit',
   classNameFieldInvalid: 'form__item_invalid',
@@ -55,7 +56,7 @@ export const httpMethod = {
 // Фикстура для локальной разработки
 export const dataJSON = {
   profile: {
-    name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
+    name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://memepedia.ru/wp-content/uploads/2017/08/1492860042_e-news.su_ohuitelnye-istorii.gif', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
   },
   places: [{
     likes: [{
@@ -443,7 +444,7 @@ export const dataJSON = {
   }, {
     likes: [],
     _id: '62c1e464ccd49b0547e9a3e9',
-    name: 'Рисованные мемы',
+    name: 'За Нерзула!',
     link: 'https://memepedia.ru/wp-content/uploads/2018/06/za-mamu-za-papu-mem-12.jpg',
     owner: {
       name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',
@@ -452,7 +453,7 @@ export const dataJSON = {
   }, {
     likes: [],
     _id: '62c1e48f5d4c8004ffe577b0',
-    name: 'Фотомемы',
+    name: 'Бонжур, епта',
     link: 'https://memepedia.ru/wp-content/uploads/2019/08/screenshot_17-2-768x500.png',
     owner: {
       name: 'Меместо', about: 'Место ваших мемов', avatar: 'https://melodyn.github.io/mesto/b88f4a1617ddbb1ad29d.jpg', _id: 'dd8b6dea22fe4ea0ad5d46f4', cohort: 'cohort0',

@@ -1,11 +1,10 @@
 import { Popup } from './Popup.js';
 
 export class PopupWithForm extends Popup {
-  constructor(commonSelector, elementPopup, commonSelectorForm, form, handler) {
+  constructor(commonSelector, elementPopup, commonSelectorForm, handler) {
     super(commonSelector, elementPopup);
 
-    this._form = form;
-    this._elementForm = form.toElement();
+    this._elementForm = elementPopup.querySelector(commonSelectorForm.selectorForm);
     this._elementFields = Array.from(this
       ._elementForm
       .querySelectorAll(commonSelectorForm.selectorField));
@@ -27,13 +26,11 @@ export class PopupWithForm extends Popup {
   _setEventListeners() {
     this._elementForm.addEventListener('submit', () => {
       this._onSubmitHandler(this._getInputValues());
-      this.close();
     });
     super._setEventListeners();
   }
 
   close() {
-    this._form.reset();
     this._onCloseHandler();
     super.close();
   }

@@ -42,7 +42,7 @@ export class Popup {
     this._elementPopup.classList.add(this._classNamePopupOpened);
   }
 
-  toElement() {
+  getElement() {
     return this._elementPopup;
   }
 }

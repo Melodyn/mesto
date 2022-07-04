@@ -1,6 +1,6 @@
-import { httpMethod } from './constants.js';
+import { httpMethod } from '../utils/constants.js';
 
-export class ApiMesto {
+export class Api {
   constructor(config) {
     const {
       apiMestoBaseURL,
@@ -12,7 +12,7 @@ export class ApiMesto {
       'Content-Type': 'application/json; charset=utf-8',
     };
 
-    this._httpClient = (page, method = httpMethod.get, body = undefined) => fetch(
+    this._fetch = (page, method = httpMethod.get, body = undefined) => fetch(
       `${apiMestoBaseURL}/${apiMestoCohort}/${page}`,
       {
         method,
@@ -41,42 +41,42 @@ export class ApiMesto {
 
   /* profile */
   getProfile() {
-    return this._httpClient('users/me');
+    return this._fetch('users/me');
   }
 
   getPlaces() {
-    return this._httpClient('cards');
+    return this._fetch('cards');
   }
 
   setAvatar({ avatar }) {
-    return this._httpClient('users/me/avatar', httpMethod.patch, { avatar });
+    return this._fetch('users/me/avatar', httpMethod.patch, { avatar });
   }
 
   setInfo({ name, about }) {
-    return this._httpClient('users/me', httpMethod.patch, { name, about });
+    return this._fetch('users/me', httpMethod.patch, { name, about });
   }
 
   /* place */
-  placeCreate({ name, link }) {
-    return this._httpClient('cards', httpMethod.post, { name, link });
+  createPlace({ name, link }) {
+    return this._fetch('cards', httpMethod.post, { name, link });
   }
 
-  placeLike({ cardId, liked }) {
+  likePlace({ cardId, liked }) {
     if (liked) {
-      return this.placeLikeRemove({ cardId });
+      return this.removeLikePlace({ cardId });
     }
-    return this.placeLikeAdd({ cardId });
+    return this.addLikePlace({ cardId });
   }
 
-  placeRemove({ cardId }) {
-    return this._httpClient(`cards/${cardId}`, httpMethod.delete);
+  removePlace({ cardId }) {
+    return this._fetch(`cards/${cardId}`, httpMethod.delete);
   }
 
-  placeLikeAdd({ cardId }) {
-    return this._httpClient(`cards/like/${cardId}`, httpMethod.put);
+  addLikePlace({ cardId }) {
+    return this._fetch(`cards/like/${cardId}`, httpMethod.put);
   }
 
-  placeLikeRemove({ cardId }) {
-    return this._httpClient(`cards/like/${cardId}`, httpMethod.delete);
+  removeLikePlace({ cardId }) {
+    return this._fetch(`cards/like/${cardId}`, httpMethod.delete);
   }
 }

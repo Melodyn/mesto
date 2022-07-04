@@ -1,4 +1,4 @@
-export class Place {
+export class Card {
   constructor(placeData, config, handler) {
     this._place = placeData;
     this._config = config;
@@ -59,13 +59,13 @@ export class Place {
 
   _setListeners() {
     this._element.like.addEventListener('click', () => {
-      this._handlerLike();
+      this._handleLike();
     });
 
     if (this._element.remove !== null) {
       this._element.remove.addEventListener('click', () => {
         const placeDataCopy = { ...this._place };
-        this._onRemoveHandler(placeDataCopy, () => this._handlerRemove());
+        this._onRemoveHandler(placeDataCopy, () => this._handleRemove());
       });
     }
 
@@ -75,7 +75,7 @@ export class Place {
     });
   }
 
-  _handlerLike() {
+  _handleLike() {
     const placeDataCopy = { ...this._place };
     this._onLikeHandler(placeDataCopy, (updatedLikes) => {
       this._place.liked = !this._place.liked;
@@ -86,12 +86,12 @@ export class Place {
     });
   }
 
-  _handlerRemove() {
+  _handleRemove() {
     this._element.container.remove();
     this._element = {};
   }
 
-  toElement() {
+  getElement() {
     return this._element.container;
   }
 }

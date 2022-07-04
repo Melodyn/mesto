@@ -1,4 +1,4 @@
-export class Profile {
+export class UserInfo {
   constructor(elementProfileTitle, elementProfileSubtitle, elementProfileAvatar, elementPageTitle) {
     this._elementProfileTitle = elementProfileTitle;
     this._elementProfileSubtitle = elementProfileSubtitle;

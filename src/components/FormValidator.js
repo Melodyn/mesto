@@ -115,7 +115,7 @@ export class FormValidator {
     return true;
   }
 
-  reset() {
+  resetErrors() {
     this._element.submit.textContent = this._element.submitOriginalText;
     this._element.form.reset();
     this._element.fields.forEach(({ elementField, elementError }) => {
@@ -125,7 +125,7 @@ export class FormValidator {
     this.enableSubmitButton();
   }
 
-  toElement() {
+  getElement() {
     return this._element.form;
   }
 }
