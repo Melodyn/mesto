@@ -39,6 +39,7 @@
 @import url('../blocks/popup/__content/popup__content.css');
 
 @import url('../blocks/form/form.css');
+@import url('../blocks/form/_fieldless/form_fieldless.css');
 @import url('../blocks/form/__title/form__title.css');
 @import url('../blocks/form/__items/form__items.css');
 @import url('../blocks/form/__item/form__item.css');
@@ -50,7 +51,3 @@
 @import url('../blocks/popup-preview/popup-preview.css');
 @import url('../blocks/popup-preview/__image/popup-preview__image.css');
 @import url('../blocks/popup-preview/__text/popup-preview__text.css');
-
-@import url('../blocks/popup-confirm/popup-confirm.css');
-@import url('../blocks/popup-confirm/__title/popup-confirm__title.css');
-@import url('../blocks/popup-confirm/__button/popup-confirm__button.css');

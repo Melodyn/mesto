@@ -61,15 +61,15 @@ export class Api {
     return this._fetch('cards', httpMethod.post, { name, link });
   }
 
+  removePlace({ cardId }) {
+    return this._fetch(`cards/${cardId}`, httpMethod.delete);
+  }
+
   likePlace({ cardId, liked }) {
     if (liked) {
       return this.removeLikePlace({ cardId });
     }
     return this.addLikePlace({ cardId });
-  }
-
-  removePlace({ cardId }) {
-    return this._fetch(`cards/${cardId}`, httpMethod.delete);
   }
 
   addLikePlace({ cardId }) {

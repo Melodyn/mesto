@@ -27,6 +27,10 @@ import { Section } from '../components/Section.js';
 const catchError = (err) => {
   alert(err.message);
 };
+const catchFormError = (form) => (err) => {
+  form.enableForm();
+  catchError(err);
+};
 
 /* app */
 const run = (appData, serviceApiMesto) => {
@@ -39,11 +43,17 @@ const run = (appData, serviceApiMesto) => {
 
   /* place */
   const elementPlacesList = document.querySelector('.places__list');
+  const formConfirm = new FormValidator(commonFormConfig, document.forms.confirm);
+  formConfirm.enableValidation();
+
   const popupConfirmRemovePlace = new PopupWithConfirmation(
     commonPopupConfig,
     elementPopupConfirm,
+    commonFormConfig,
     {
-      selectorConfirm: '.popup-confirm__button_action_confirm',
+      onOpen: () => {
+        formConfirm.enableSubmitButton();
+      },
     },
   );
   const popupPreviewImage = new PopupWithImage(
@@ -73,7 +83,7 @@ const run = (appData, serviceApiMesto) => {
             popupConfirmRemovePlace.close();
             removeCallback();
           })
-          .catch(catchError);
+          .catch(catchFormError(formConfirm));
 
         popupConfirmRemovePlace.setConfirmAction(sendRemoveRequest);
         popupConfirmRemovePlace.open();
@@ -105,15 +115,18 @@ const run = (appData, serviceApiMesto) => {
     elementPopupAddPlace,
     commonFormConfig,
     {
+      onOpen: () => {
+        formAddPlace.resetForm();
+        formAddPlace.disableSubmitButton('');
+      },
       onSubmit: (placeSourceData) => serviceApiMesto
         .createPlace(placeSourceData)
         .then((placeData) => {
           popupAddPlace.close();
           placesList.addItem(createPlace(placeData));
-          formAddPlace.resetErrors();
+          formAddPlace.resetForm();
         })
-        .catch(catchError),
-      onClose: () => formAddPlace.disableSubmitButton(),
+        .catch(catchFormError(formAddPlace)),
     },
   );
 
@@ -157,10 +170,10 @@ const run = (appData, serviceApiMesto) => {
         .then(() => {
           popupEditProfile.close();
           profile.setInfo(data);
-          formEditProfile.resetErrors();
         })
-        .catch(catchError),
+        .catch(catchFormError(formEditProfile)),
       onOpen: () => {
+        formEditProfile.resetForm();
         const { title, subtitle } = profile.getFullInfo();
         elementFormEditProfile.title.value = title;
         elementFormEditProfile.subtitle.value = subtitle;
@@ -177,10 +190,10 @@ const run = (appData, serviceApiMesto) => {
         .then(() => {
           popupEditAvatar.close();
           profile.setAvatar(data);
-          formEditAvatar.resetErrors();
         })
-        .catch(catchError),
+        .catch(catchFormError(formEditAvatar)),
       onOpen: () => {
+        formEditAvatar.resetForm();
         const { avatar } = profile.getFullInfo();
         elementFormEditAvatar.avatar.value = avatar;
       },
@@ -207,13 +220,13 @@ const run = (appData, serviceApiMesto) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const serviceApiMesto = new Api(appConfig);
-  run(dataJSON, serviceApiMesto); // Фикстура для локальной разработки
-  // const promises = Promise.all([
-  //   serviceApiMesto.getProfile(),
-  //   serviceApiMesto.getPlaces(),
-  // ]);
-  // promises
-  //   .then(([profile, places]) => run({ profile, places }, serviceApiMesto))
-  //   // eslint-disable-next-line
-  //   .catch(catchError);
+  // run(dataJSON, serviceApiMesto); // Фикстура для локальной разработки
+  const promises = Promise.all([
+    serviceApiMesto.getProfile(),
+    serviceApiMesto.getPlaces(),
+  ]);
+  promises
+    .then(([profile, places]) => run({ profile, places }, serviceApiMesto))
+    // eslint-disable-next-line
+    .catch(catchError);
 });

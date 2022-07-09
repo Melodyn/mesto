@@ -43,7 +43,7 @@ export class FormValidator {
     if (isValid) {
       this.enableSubmitButton();
     } else {
-      this.disableSubmitButton();
+      this.disableSubmitButton('');
     }
 
     this._validityState.formIsValid = isValid;
@@ -78,20 +78,11 @@ export class FormValidator {
         return;
       }
 
-      this._element.submit.textContent = 'Сохранение…';
       this.disableSubmitButton();
       this._element.fields.forEach(({ elementField }) => {
         elementField.setAttribute('disabled', 'disabled');
       });
     });
-  }
-
-  disableSubmitButton() {
-    this._element.submit.setAttribute('disabled', 'disabled');
-  }
-
-  enableSubmitButton() {
-    this._element.submit.removeAttribute('disabled');
   }
 
   _showFieldError(elementField, elementError) {
@@ -115,8 +106,26 @@ export class FormValidator {
     return true;
   }
 
-  resetErrors() {
+  disableSubmitButton(withText = 'Сохранение…') {
+    if (withText) {
+      this._element.submit.textContent = withText;
+    }
+    this._element.submit.setAttribute('disabled', 'disabled');
+  }
+
+  enableSubmitButton() {
     this._element.submit.textContent = this._element.submitOriginalText;
+    this._element.submit.removeAttribute('disabled');
+  }
+
+  enableForm() {
+    this.enableSubmitButton();
+    this._element.fields.forEach(({ elementField }) => {
+      elementField.removeAttribute('disabled');
+    });
+  }
+
+  resetForm() {
     this._element.form.reset();
     this._element.fields.forEach(({ elementField, elementError }) => {
       elementField.removeAttribute('disabled');

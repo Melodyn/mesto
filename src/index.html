@@ -90,7 +90,7 @@
     </div>
   </div>
 
-  <div class="popup popup_type_edit-profile" style="display: none" tabindex="0">
+  <div class="popup popup_type_edit-profile" style="display: none">
     <div class="popup__container popup__container_type_form">
       <button
         type="button"
@@ -131,7 +131,7 @@
     </div>
   </div>
 
-  <div class="popup popup_type_edit-avatar" style="display: none" tabindex="0">
+  <div class="popup popup_type_edit-avatar" style="display: none">
     <div class="popup__container popup__container_type_form">
       <button
         type="button"
@@ -162,22 +162,22 @@
     </div>
   </div>
 
-  <div class="popup popup_type_confirm" style="display: none" tabindex="0">
+  <div class="popup popup_type_confirm" style="display: none">
     <div class="popup__container popup__container_type_form">
       <button
         type="button"
         class="button popup__close"
         tabindex="2"
         aria-label="Закрыть"></button>
-      <div class="popup__content popup-confirm">
-        <h2 class="popup-confirm__title">Вы уверены?</h2>
+      <form action="/" name="confirm" class="popup__content form form_fieldless" tabindex="0" novalidate>
+        <h2 class="form__title">Вы уверены?</h2>
         <button
-          type="button"
-          name="confirm"
-          class="button popup-confirm__button popup-confirm__button_action_confirm"
+          type="submit"
+          name="submit"
+          class="button form__submit"
           tabindex="1">Да
         </button>
-      </div>
+      </form>
     </div>
   </div>
 

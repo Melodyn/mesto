@@ -1,34 +1,16 @@
-import { Popup } from './Popup.js';
+import { PopupWithForm } from './PopupWithForm.js';
 
-export class PopupWithConfirmation extends Popup {
-  constructor(commonSelector, elementPopup, { selectorConfirm }) {
-    super(commonSelector, elementPopup);
-    this._element = {
-      confirm: elementPopup.querySelector(selectorConfirm),
-    };
+export class PopupWithConfirmation extends PopupWithForm {
+  constructor(...params) {
+    super(...params);
     this._confirmAction = () => {};
-    this._setEventListeners();
-  }
-
-  disableConfirmButton() {
-    this._element.confirm.setAttribute('disabled', 'disabled');
-  }
-
-  enableConfirmButton() {
-    this._element.confirm.removeAttribute('disabled');
   }
 
   _setEventListeners() {
-    this._element.confirm.addEventListener('click', () => {
-      this.disableConfirmButton();
-      this._confirmAction();
+    this._elementForm.addEventListener('submit', () => {
+      this._onSubmitHandler(this._confirmAction());
     });
     super._setEventListeners();
-  }
-
-  open() {
-    this.enableConfirmButton();
-    super.open();
   }
 
   setConfirmAction(action) {
