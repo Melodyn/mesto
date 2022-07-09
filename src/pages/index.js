@@ -25,6 +25,7 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Section } from '../components/Section.js';
 
 const catchError = (err) => {
+  // eslint-disable-next-line
   alert(err.message);
 };
 const catchFormError = (form) => (err) => {
