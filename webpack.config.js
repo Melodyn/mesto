@@ -9,6 +9,7 @@ module.exports = {
     filename: '[name].[contenthash].js',
     clean: true,
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
