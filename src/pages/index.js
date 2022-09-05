@@ -42,11 +42,6 @@ const run = (appData, serviceApiMesto) => {
   const elementPopupPreviewImage = document.querySelector('.popup_type_preview');
   const elementPopupConfirm = document.querySelector('.popup_type_confirm');
 
-  setTimeout(() => {
-    const header = document.querySelector('.header');
-    header.innerHTML = '<div class="jopa">hello</div>';
-  }, 10000);
-
   /* place */
   const elementPlacesList = document.querySelector('.places__list');
   const formConfirm = new FormValidator(commonFormConfig, document.forms.confirm);
